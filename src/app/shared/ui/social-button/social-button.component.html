@@ -1,0 +1,29 @@
+<a 
+  [href]="url" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  [class]="buttonClasses"
+  [attr.aria-label]="ariaLabel"
+>
+  <!-- Icon - Use .ico files if available, otherwise SVG -->
+  <img 
+    *ngIf="hasCustomIcon; else svgIcon"
+    [src]="customIconPath" 
+    [alt]="platform + ' icon'"
+    [class]="iconClasses"
+  />
+  
+  <ng-template #svgIcon>
+    <svg 
+      [class]="iconClasses" 
+      fill="currentColor" 
+      viewBox="0 0 24 24"
+      [innerHTML]="iconSvg"
+    ></svg>
+  </ng-template>
+  
+  <!-- Platform name for larger sizes -->
+  <span *ngIf="showLabel && platform" class="ml-2 font-medium">
+    {{ platform }}
+  </span>
+</a>

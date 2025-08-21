@@ -49,20 +49,6 @@
             {{ translate('header.contact') }}
           </app-button>
         </div>
-        
-        <!-- Social Links -->
-        <div class="flex items-center space-x-6 pt-8 animate-slide-up" style="animation-delay: 1s;">
-          <p class="text-sm text-gray-500 font-medium">Sígueme:</p>
-          <div class="flex items-center space-x-4">
-            <a *ngFor="let social of socialLinks" 
-               [href]="social.url" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-600 hover:text-primary-600 hover:shadow-lg transform hover:scale-110 transition-all duration-200">
-              <span class="text-lg">{{ social.icon }}</span>
-            </a>
-          </div>
-        </div>
       </div>
       
       <!-- Profile Image -->
@@ -80,17 +66,32 @@
             <div class="absolute inset-0 rounded-full border-4 border-gradient-to-r from-primary-400 to-secondary-400 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <!-- Floating elements -->
-          <div class="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-lg animate-bounce-gentle">
-            <span class="text-2xl">🎨</span>
+          <!-- Floating Social Buttons -->
+          <div class="absolute -top-6 -right-6 animate-bounce-gentle">
+            <app-social-button
+              platform="behance"
+              url="https://behance.net/julimartinez"
+              size="floating"
+              variant="default"
+            ></app-social-button>
           </div>
           
-          <div class="absolute -bottom-4 -left-4 bg-white p-3 rounded-xl shadow-lg animate-bounce-gentle" style="animation-delay: 1.5s;">
-            <span class="text-xl">📸</span>
+          <div class="absolute -bottom-4 -left-4 animate-bounce-gentle" style="animation-delay: 1.5s;">
+            <app-social-button
+              platform="instagram"
+              url="https://www.instagram.com/visagesvillages/"
+              size="floating"
+              variant="default"
+            ></app-social-button>
           </div>
           
-          <div class="absolute top-1/4 -left-8 bg-white p-3 rounded-full shadow-lg animate-bounce-gentle" style="animation-delay: 0.5s;">
-            <span class="text-lg">🚀</span>
+          <div class="absolute top-1/4 -left-8 animate-bounce-gentle" style="animation-delay: 0.5s;">
+            <app-social-button
+              platform="linkedin"
+              url="https://www.linkedin.com/in/julietacuadrarojas/"
+              size="floating"
+              variant="default"
+            ></app-social-button>
           </div>
         </div>
       </div>
