@@ -55,3 +55,15 @@
   color: white;
   box-shadow: 0 10px 25px rgba(29, 161, 242, 0.3);
 }
+
+.social-button.vimeo:hover {
+  background-color: #1ab7ea;
+  color: white;
+  box-shadow: 0 10px 25px rgba(26, 183, 234, 0.3);
+}
+
+.social-button.flickr:hover {
+  background-color: #ff0084;
+  color: white;
+  box-shadow: 0 10px 25px rgba(255, 0, 132, 0.3);
+}

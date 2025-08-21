@@ -41,12 +41,13 @@ export class AboutComponent {
   ];
 
   skills: Skill[] = [
-    { name: 'Adobe Creative Suite', level: 95, icon: '🎨' },
-    { name: 'Marketing Digital', level: 90, icon: '📊' },
-    { name: 'Producción Audiovisual', level: 88, icon: '🎬' },
-    { name: 'Social Media Management', level: 92, icon: '📱' },
-    { name: 'Estrategia de Contenidos', level: 85, icon: '📝' },
-    { name: 'Fotografía', level: 90, icon: '📸' }
+    { name: 'Adobe Creative Suite', level: 50, icon: '🎨' },
+    { name: 'Dirección de Arte', level: 80, icon: '👩🏼‍🎨' },
+    { name: 'Marketing Digital', level: 70, icon: '💻' },
+    { name: 'Producción Audiovisual', level: 70, icon: '🎬' },
+    { name: 'Social Media Management', level: 80, icon: '📱' },
+    { name: 'Estrategia de Contenidos', level: 100, icon: '📝' },
+    { name: 'Fotografía', level: 60, icon: '📸' }
   ];
 
   experiences: Experience[] = [

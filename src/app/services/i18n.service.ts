@@ -74,7 +74,7 @@ export class I18nService {
       pt: 'Profissional em Artes Audiovisuais e Marketing'
     },
     'home.description': {
-      es: 'Licenciada en Artes Audiovisuales con más de 8 años de experiencia en marketing digital. Especializada en crear contenido visual impactante que conecta marcas con su audiencia.',
+      es: 'Apasionada por el marketing digital y el storytelling de marca. Con experiencia en estrategia de contenido, engagement de audiencia y liderazgo de equipos creativos para desarrollar campañas de alto impacto.',
       en: 'Licensed in Audiovisual Arts with over 8 years of experience in digital marketing. Specialized in creating impactful visual content that connects brands with their audience.',
       pt: 'Licenciada em Artes Audiovisuais com mais de 8 anos de experiência em marketing digital. Especializada em criar conteúdo visual impactante que conecta marcas com seu público.'
     },
