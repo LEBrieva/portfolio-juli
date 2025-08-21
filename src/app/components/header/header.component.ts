@@ -84,10 +84,12 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
             <!-- Mobile Menu Button -->
             <button 
               (click)="toggleMobileMenu()"
-              class="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+              class="block md:hidden p-2 rounded-lg bg-primary-100 hover:bg-primary-200 transition-colors duration-200 border border-primary-300"
+              aria-label="Menú de navegación"
+              title="Menú"
             >
               <svg 
-                class="w-6 h-6 text-gray-700"
+                class="w-6 h-6 text-primary-700"
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -106,14 +108,14 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
         <!-- Mobile Navigation Menu -->
         <div 
           *ngIf="showMobileMenu()"
-          class="md:hidden mt-4 py-4 border-t border-gray-200 animate-fade-in"
+          class="md:hidden mt-4 py-4 border-t border-gray-200 bg-white shadow-lg animate-fade-in"
         >
           <ul class="space-y-2">
             <li *ngFor="let item of navItems">
               <a 
                 [href]="item.href"
                 (click)="scrollToSection($event, item.href); toggleMobileMenu()"
-                class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-all duration-200"
+                class="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-lg font-medium transition-colors duration-200"
               >
                 {{ translate(item.label) }}
               </a>
