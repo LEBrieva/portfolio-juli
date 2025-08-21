@@ -255,13 +255,11 @@ export class ServicesComponent {
 
   selectService(service: Service): void {
     // Simulate service selection - could open a modal or redirect to contact
-    console.log('Service selected:', service.title);
     this.scrollToContact();
   }
 
   selectPlan(plan: ServicePlan): void {
     this.selectedServicePlan.set(plan);
-    console.log('Plan selected:', plan.name);
     this.scrollToContact();
   }
 

@@ -172,7 +172,6 @@ export class ContactComponent {
       setTimeout(() => {
         // Simulate 90% success rate
         if (Math.random() > 0.1) {
-          console.log('Form submitted:', formData);
           resolve();
         } else {
           reject(new Error('Simulated submission error'));

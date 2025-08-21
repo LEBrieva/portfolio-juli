@@ -9,7 +9,11 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
   standalone: true,
   imports: [CommonModule],
   template: `
-    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300 max-w-full overflow-hidden">
+    <header 
+      class="fixed left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300 max-w-full overflow-hidden"
+      [class.top-0]="isHeaderVisible()"
+      [class.-top-20]="!isHeaderVisible()"
+    >
       <nav class="container mx-auto px-4 py-4 max-w-full">
         <div class="flex items-center justify-between">
           <!-- Logo -->
@@ -41,9 +45,9 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
           </div>
 
           <!-- Language Selector & Mobile Menu -->
-          <div class="flex items-center space-x-4"></div>
+          <div class="flex items-center space-x-4">
             <!-- Language Dropdown -->
-            <div class="relative" #languageDropdown>
+            <div class="relative" #languageDropdown data-dropdown="language">
               <button 
                 (click)="toggleLanguageDropdown()"
                 class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
@@ -62,23 +66,6 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"></path>
                 </svg>
               </button>
-
-              <!-- Language Dropdown Menu -->
-              <div 
-                *ngIf="showLanguageDropdown()"
-                class="absolute right-0 top-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[150px] animate-fade-in"
-              >
-                <button
-                  *ngFor="let language of i18nService.availableLanguages"
-                  (click)="selectLanguage(language.code)"
-                  class="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                  [class.bg-primary-50]="language.code === currentLanguage()"
-                  [class.text-primary-600]="language.code === currentLanguage()"
-                >
-                  <span class="text-lg">{{ language.flag }}</span>
-                  <span class="font-medium">{{ language.name }}</span>
-                </button>
-              </div>
             </div>
 
             <!-- Mobile Menu Button -->
@@ -87,6 +74,7 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
               class="block md:hidden p-2 rounded-lg bg-primary-100 hover:bg-primary-200 transition-colors duration-200 border border-primary-300"
               aria-label="Menú de navegación"
               title="Menú"
+              data-menu="mobile"
             >
               <svg 
                 class="w-6 h-6 text-primary-700"
@@ -103,6 +91,7 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
               </svg>
             </button>
           </div>
+        </div>
 
         <!-- Mobile Navigation Menu -->
         <div 
@@ -123,6 +112,24 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
         </div>
       </nav>
     </header>
+
+    <!-- Language Dropdown Menu - Outside header for proper z-index -->
+    <div 
+      *ngIf="debugDropdownState()"
+      class="fixed bg-white rounded-lg shadow-xl border border-gray-200 py-2 min-w-[150px]"
+      style="z-index: 99999; top: 60px; right: 20px;"
+    >
+      <button
+        *ngFor="let language of i18nService.availableLanguages"
+        (click)="selectLanguage(language.code)"
+        class="w-full flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+        [class.bg-primary-50]="language.code === currentLanguage()"
+        [class.text-primary-600]="language.code === currentLanguage()"
+      >
+        <span class="text-lg">{{ language.flag }}</span>
+        <span class="font-medium">{{ language.name }}</span>
+      </button>
+    </div>
   `,
   styles: [`
     @keyframes fade-in {
@@ -143,10 +150,12 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  private lastScrollY = 0;
   
   currentLanguage = signal<SupportedLanguage>('es');
   showLanguageDropdown = signal(false);
   showMobileMenu = signal(false);
+  isHeaderVisible = signal(true);
 
   navItems: NavItem[] = [
     { id: 'home', label: 'nav.home', href: '#home' },
@@ -160,6 +169,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(public i18nService: I18nService) {}
 
   ngOnInit(): void {
+    // Initialize i18n service
+    this.i18nService.initializeLanguage();
+    
     this.i18nService.currentLanguage$
       .pipe(takeUntil(this.destroy$))
       .subscribe(language => {
@@ -168,12 +180,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     // Close dropdowns when clicking outside
     document.addEventListener('click', this.handleOutsideClick.bind(this));
+    
+    // Add scroll listener for header hide/show
+    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
     document.removeEventListener('click', this.handleOutsideClick.bind(this));
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
   }
 
   translate(key: string): string {
@@ -194,8 +210,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return language?.name || 'Español';
   }
 
+  // Debug method to check dropdown state in template
+  debugDropdownState(): boolean {
+    const state = this.showLanguageDropdown();
+    return state;
+  }
+
   toggleLanguageDropdown(): void {
-    this.showLanguageDropdown.set(!this.showLanguageDropdown());
+    const newState = !this.showLanguageDropdown();
+    this.showLanguageDropdown.set(newState);
     this.showMobileMenu.set(false);
   }
 
@@ -227,10 +250,43 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showMobileMenu.set(false);
   }
 
+  private handleScroll(): void {
+    const currentScrollY = window.scrollY;
+    const scrollThreshold = 100; // Minimum scroll distance to trigger hide/show
+    
+    // Only apply auto-hide on mobile devices
+    if (window.innerWidth <= 768) {
+      if (currentScrollY > scrollThreshold) {
+        // Scrolling down - hide header
+        if (currentScrollY > this.lastScrollY && this.isHeaderVisible()) {
+          this.isHeaderVisible.set(false);
+          // Close any open dropdowns when hiding
+          this.showLanguageDropdown.set(false);
+          this.showMobileMenu.set(false);
+        }
+        // Scrolling up - show header
+        else if (currentScrollY < this.lastScrollY && !this.isHeaderVisible()) {
+          this.isHeaderVisible.set(true);
+        }
+      }
+    } else {
+      // Always show header on desktop
+      this.isHeaderVisible.set(true);
+    }
+    
+    this.lastScrollY = currentScrollY;
+  }
+
   private handleOutsideClick(event: Event): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('.relative')) {
+    const languageDropdown = target.closest('[data-dropdown="language"]');
+    const mobileMenuButton = target.closest('[data-menu="mobile"]');
+    
+    if (!languageDropdown && this.showLanguageDropdown()) {
       this.showLanguageDropdown.set(false);
+    }
+    
+    if (!mobileMenuButton && this.showMobileMenu()) {
       this.showMobileMenu.set(false);
     }
   }
