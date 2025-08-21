@@ -33,11 +33,11 @@ interface Achievement {
 })
 export class AboutComponent {
   personalInfo = [
-    { icon: '👩', label: 'Nombre', value: 'Julia Martínez' },
-    { icon: '📍', label: 'Ubicación', value: 'Buenos Aires, Argentina' },
+    { icon: '👩', label: 'Nombre', value: 'Julieta Cuadra Rojas' },
+    { icon: '📍', label: 'Ubicación', value: 'Rio de Janeiro, Brasil' },
     { icon: '🎓', label: 'Educación', value: 'Lic. en Artes Audiovisuales' },
-    { icon: '💼', label: 'Experiencia', value: '8+ años en Marketing' },
-    { icon: '📧', label: 'Email', value: 'juli@juliportfolio.com' }
+    { icon: '💼', label: 'Experiencia', value: '5+ años en Marketing' },
+    { icon: '📧', label: 'Email', value: 'cuadrarojasjulieta@gmail.com' }
   ];
 
   skills: Skill[] = [
