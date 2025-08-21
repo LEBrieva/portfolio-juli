@@ -1,0 +1,117 @@
+<section id="about" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {{ translate('about.title') }}
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        {{ translate('about.content') }}
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start mb-16">
+      <!-- Personal Info -->
+      <div class="space-y-8">
+        <div class="bg-gradient-to-br from-primary-50 to-secondary-50 p-8 rounded-2xl">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Información Personal</h3>
+          <div class="space-y-4">
+            <div *ngFor="let info of personalInfo" class="flex items-center space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                <span class="text-lg">{{ info.icon }}</span>
+              </div>
+              <div>
+                <p class="font-medium text-gray-900">{{ info.label }}</p>
+                <p class="text-gray-600">{{ info.value }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-6">Habilidades Técnicas</h3>
+          <div class="space-y-4">
+            <div *ngFor="let skill of skills" class="bg-white p-4 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-3">
+                  <span class="text-lg">{{ skill.icon }}</span>
+                  <span class="font-medium text-gray-900">{{ skill.name }}</span>
+                </div>
+                <span class="text-sm font-medium text-primary-600">{{ skill.level }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  class="bg-gradient-to-r from-primary-600 to-secondary-600 h-2 rounded-full transition-all duration-1000 ease-out"
+                  [style.width.%]="skill.level"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Timeline -->
+      <div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Experiencia Profesional</h3>
+        <div class="space-y-6">
+          <div *ngFor="let exp of experiences; let i = index" 
+               class="relative pl-8 pb-6"
+               [class.border-l-2]="i !== experiences.length - 1"
+               [class.border-gray-200]="i !== experiences.length - 1">
+            
+            <!-- Timeline dot -->
+            <div class="absolute left-0 top-0 w-6 h-6 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full transform -translate-x-2.5 flex items-center justify-center">
+              <span class="text-xs text-white">{{ exp.icon }}</span>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 ml-4">
+              <div class="mb-2">
+                <h4 class="text-lg font-bold text-gray-900">{{ exp.title }}</h4>
+                <p class="text-primary-600 font-medium">{{ exp.company }}</p>
+                <p class="text-sm text-gray-500">{{ exp.period }}</p>
+              </div>
+              <p class="text-gray-600 leading-relaxed">{{ exp.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div class="mt-16">
+      <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">Logros Destacados</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <app-card 
+          *ngFor="let achievement of achievements"
+          [variant]="'elevated'"
+          [padding]="'md'"
+          [hoverable]="true"
+          class="text-center"
+        >
+          <div slot="content">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-white text-2xl">{{ achievement.icon }}</span>
+              </div>
+              <div class="text-primary-600 font-bold text-lg mb-2">{{ achievement.year }}</div>
+              <h4 class="text-xl font-bold text-gray-900 mb-3">{{ achievement.title }}</h4>
+              <p class="text-gray-600 leading-relaxed">{{ achievement.description }}</p>
+            </div>
+          </div>
+        </app-card>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-16 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 text-white">
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div *ngFor="let stat of stats" class="space-y-2">
+          <div class="text-3xl lg:text-4xl font-bold">{{ stat.value }}</div>
+          <div class="text-lg opacity-90">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

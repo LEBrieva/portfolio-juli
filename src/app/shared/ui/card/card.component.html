@@ -1,0 +1,37 @@
+<div [class]="cardClasses">
+  <div *ngIf="imageUrl" class="relative overflow-hidden">
+    <img 
+      [src]="imageUrl" 
+      [alt]="imageAlt"
+      class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+    />
+    <div *ngIf="badge" class="absolute top-4 right-4 bg-primary-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+      {{ badge }}
+    </div>
+  </div>
+  
+  <div [class]="contentClasses">
+    <div *ngIf="title" class="mb-2">
+      <h3 [class]="titleClasses">{{ title }}</h3>
+    </div>
+    
+    <div *ngIf="subtitle" class="mb-3">
+      <p class="text-gray-600 text-sm font-medium">{{ subtitle }}</p>
+    </div>
+    
+    <ng-content select="[slot=content]"></ng-content>
+    
+    <div *ngIf="tags && tags.length > 0" class="mt-4 flex flex-wrap gap-2">
+      <span 
+        *ngFor="let tag of tags" 
+        class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-medium"
+      >
+        {{ tag }}
+      </span>
+    </div>
+    
+    <div *ngIf="showActions" class="mt-6 pt-4 border-t border-gray-100">
+      <ng-content select="[slot=actions]"></ng-content>
+    </div>
+  </div>
+</div>

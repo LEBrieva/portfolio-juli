@@ -1,0 +1,196 @@
+<section id="testimonials" class="py-20 bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {{ translate('nav.testimonials') }}
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Lo que dicen nuestros clientes sobre el trabajo realizado juntos.
+      </p>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div class="relative mb-16">
+      <div class="overflow-hidden rounded-2xl">
+        <div 
+          class="flex transition-transform duration-500 ease-in-out"
+          [style.transform]="'translateX(-' + (currentTestimonialIndex() * 100) + '%)'"
+        >
+          <div 
+            *ngFor="let testimonial of testimonials; trackBy: trackByTestimonialId"
+            class="w-full flex-shrink-0"
+          >
+            <div class="bg-white rounded-2xl p-8 lg:p-12 shadow-xl mx-4">
+              <div class="flex flex-col lg:flex-row items-center lg:items-start space-y-6 lg:space-y-0 lg:space-x-8">
+                
+                <!-- Avatar -->
+                <div class="flex-shrink-0">
+                  <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg">
+                    <img 
+                      [src]="testimonial.avatarUrl || getDefaultAvatar(testimonial.name)"
+                      [alt]="testimonial.name"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                
+                <!-- Content -->
+                <div class="flex-1 text-center lg:text-left">
+                  <!-- Quote -->
+                  <div class="mb-6">
+                    <div class="text-4xl lg:text-5xl text-primary-600 mb-4">"</div>
+                    <p class="text-lg lg:text-xl text-gray-700 leading-relaxed italic">
+                      {{ testimonial.content }}
+                    </p>
+                    <div class="text-4xl lg:text-5xl text-primary-600 text-right">"</div>
+                  </div>
+                  
+                  <!-- Rating -->
+                  <div class="flex justify-center lg:justify-start items-center mb-4">
+                    <div class="flex space-x-1">
+                      <span 
+                        *ngFor="let star of [1,2,3,4,5]" 
+                        [class]="star <= testimonial.rating ? 'text-yellow-400' : 'text-gray-300'"
+                        class="text-xl"
+                      >
+                        ⭐
+                      </span>
+                    </div>
+                    <span class="ml-3 text-gray-600 font-medium">
+                      ({{ testimonial.rating }}/5)
+                    </span>
+                  </div>
+                  
+                  <!-- Author Info -->
+                  <div>
+                    <h4 class="text-xl font-bold text-gray-900">{{ testimonial.name }}</h4>
+                    <p class="text-primary-600 font-medium">{{ testimonial.position }}</p>
+                    <p class="text-gray-600">{{ testimonial.company }}</p>
+                    <p class="text-sm text-gray-500 mt-2">
+                      {{ formatDate(testimonial.date) }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button 
+        (click)="previousTestimonial()"
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-600 transition-all duration-200"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+      
+      <button 
+        (click)="nextTestimonial()"
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-600 transition-all duration-200"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+      <!-- Dots Indicator -->
+      <div class="flex justify-center mt-8 space-x-3">
+        <button
+          *ngFor="let testimonial of testimonials; let i = index"
+          (click)="goToTestimonial(i)"
+          [class]="i === currentTestimonialIndex() ? 'bg-primary-600' : 'bg-gray-300 hover:bg-gray-400'"
+          class="w-3 h-3 rounded-full transition-colors duration-200"
+        ></button>
+      </div>
+    </div>
+
+    <!-- Testimonials Grid (Additional) -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <app-card
+        *ngFor="let testimonial of additionalTestimonials"
+        [variant]="'elevated'"
+        [padding]="'md'"
+        [hoverable]="true"
+        class="testimonial-card"
+      >
+        <div slot="content">
+          <!-- Rating -->
+          <div class="flex items-center justify-center mb-4">
+            <div class="flex space-x-1">
+              <span 
+                *ngFor="let star of [1,2,3,4,5]" 
+                [class]="star <= testimonial.rating ? 'text-yellow-400' : 'text-gray-300'"
+                class="text-lg"
+              >
+                ⭐
+              </span>
+            </div>
+          </div>
+          
+          <!-- Quote -->
+          <p class="text-gray-700 leading-relaxed mb-6 italic text-center">
+            "{{ testimonial.content }}"
+          </p>
+          
+          <!-- Author -->
+          <div class="text-center border-t pt-4">
+            <div class="w-12 h-12 rounded-full overflow-hidden mx-auto mb-3 shadow-md">
+              <img 
+                [src]="testimonial.avatarUrl || getDefaultAvatar(testimonial.name)"
+                [alt]="testimonial.name"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <h4 class="font-bold text-gray-900">{{ testimonial.name }}</h4>
+            <p class="text-primary-600 font-medium text-sm">{{ testimonial.position }}</p>
+            <p class="text-gray-600 text-sm">{{ testimonial.company }}</p>
+          </div>
+        </div>
+      </app-card>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-white rounded-3xl p-8 lg:p-12 shadow-xl">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-bold text-gray-900 mb-4">Resultados que Hablan</h3>
+        <p class="text-lg text-gray-600">
+          Los números que respaldan la calidad de nuestro trabajo
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-4 gap-8">
+        <div *ngFor="let stat of clientStats" class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span class="text-white text-2xl">{{ stat.icon }}</span>
+          </div>
+          <div class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">{{ stat.value }}</div>
+          <div class="text-gray-600 font-medium">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-16">
+      <div class="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-3xl p-8 lg:p-12 text-white">
+        <h3 class="text-3xl font-bold mb-4">¿Quieres ser nuestro próximo caso de éxito?</h3>
+        <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          Únete a los clientes satisfechos que han transformado sus negocios con nuestros servicios
+        </p>
+        <app-button
+          variant="secondary"
+          size="lg"
+          (clicked)="scrollToContact()"
+          class="bg-white text-primary-600 hover:bg-gray-50"
+        >
+          <span class="mr-2">🚀</span>
+          Comenzar Mi Proyecto
+        </app-button>
+      </div>
+    </div>
+  </div>
+</section>

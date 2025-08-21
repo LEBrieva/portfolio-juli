@@ -1,0 +1,201 @@
+<section id="services" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {{ translate('services.title') }}
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Ofrezco soluciones integrales que combinan creatividad audiovisual con estrategias de marketing efectivas.
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      <div 
+        *ngFor="let service of services; let i = index"
+        class="group cursor-pointer"
+        (click)="toggleServiceDetails(service.id)"
+        (mouseenter)="setHoveredService(service.id)"
+        (mouseleave)="setHoveredService(null)"
+      >
+        <div 
+          [class]="getServiceCardClass(service.id)"
+          class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2"
+        >
+          <!-- Service Icon & Title -->
+          <div class="text-center mb-6">
+            <div 
+              [class]="getIconClass(service.id)"
+              class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
+            >
+              {{ service.icon }}
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ service.title }}</h3>
+            <p class="text-gray-600 leading-relaxed">{{ service.description }}</p>
+          </div>
+
+          <!-- Service Features -->
+          <div class="space-y-3 mb-6">
+            <div 
+              *ngFor="let feature of service.features.slice(0, 3)" 
+              class="flex items-center space-x-3"
+            >
+              <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-primary-600 text-xs">✓</span>
+              </div>
+              <span class="text-gray-700">{{ feature }}</span>
+            </div>
+            <div 
+              *ngIf="service.features.length > 3"
+              class="text-primary-600 text-sm font-medium"
+            >
+              +{{ service.features.length - 3 }} características más
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="text-center mb-6">
+            <div class="text-3xl font-bold text-gray-900 mb-1">{{ service.price }}</div>
+            <div class="text-sm text-gray-500">Precio base</div>
+          </div>
+
+          <!-- CTA Button -->
+          <app-button
+            variant="primary"
+            [fullWidth]="true"
+            (clicked)="selectService(service)"
+          >
+            <span class="mr-2">💬</span>
+            Consultar
+          </app-button>
+
+          <!-- Expandable Details -->
+          <div 
+            *ngIf="expandedService() === service.id"
+            class="mt-6 pt-6 border-t border-gray-100 animate-fade-in"
+          >
+            <h4 class="font-bold text-gray-900 mb-3">Características Completas:</h4>
+            <div class="space-y-2">
+              <div 
+                *ngFor="let feature of service.features" 
+                class="flex items-start space-x-3"
+              >
+                <div class="w-4 h-4 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span class="text-primary-600 text-xs">✓</span>
+                </div>
+                <span class="text-gray-700 text-sm">{{ feature }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Plans -->
+    <div class="bg-gray-50 rounded-3xl p-8 lg:p-12">
+      <div class="text-center mb-12">
+        <h3 class="text-3xl font-bold text-gray-900 mb-4">Planes de Servicio</h3>
+        <p class="text-lg text-gray-600">
+          Elige el plan que mejor se adapte a tus necesidades y presupuesto
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div 
+          *ngFor="let plan of servicePlans"
+          [class]="getPlanCardClass(plan)"
+          class="relative bg-white rounded-2xl p-8 transition-all duration-300"
+        >
+          <!-- Popular badge -->
+          <div 
+            *ngIf="plan.popular" 
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2"
+          >
+            <div class="bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+              ⭐ Más Popular
+            </div>
+          </div>
+
+          <div class="text-center mb-8">
+            <h4 class="text-2xl font-bold text-gray-900 mb-2">{{ plan.name }}</h4>
+            <div class="text-4xl font-bold text-primary-600 mb-2">{{ plan.price }}</div>
+            <div class="text-gray-600">{{ plan.duration }}</div>
+            <p class="text-gray-600 mt-4">{{ plan.description }}</p>
+          </div>
+
+          <div class="space-y-4 mb-8">
+            <div 
+              *ngFor="let feature of plan.features"
+              class="flex items-center space-x-3"
+            >
+              <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <span class="text-green-600 text-xs">✓</span>
+              </div>
+              <span class="text-gray-700">{{ feature }}</span>
+            </div>
+          </div>
+
+          <app-button
+            [variant]="plan.popular ? 'primary' : 'outline'"
+            [fullWidth]="true"
+            size="lg"
+            (clicked)="selectPlan(plan)"
+          >
+            <span class="mr-2">🚀</span>
+            Elegir Plan
+          </app-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process Section -->
+    <div class="mt-16">
+      <div class="text-center mb-12">
+        <h3 class="text-3xl font-bold text-gray-900 mb-4">Mi Proceso de Trabajo</h3>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Una metodología probada que garantiza resultados excepcionales
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div 
+          *ngFor="let step of processSteps; let i = index"
+          class="text-center group"
+        >
+          <div class="relative mb-6">
+            <div class="w-20 h-20 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+              <span class="text-white text-2xl">{{ step.icon }}</span>
+            </div>
+            <div class="absolute -top-2 -right-2 w-8 h-8 bg-white border-4 border-primary-600 rounded-full flex items-center justify-center font-bold text-primary-600">
+              {{ i + 1 }}
+            </div>
+          </div>
+          
+          <h4 class="text-xl font-bold text-gray-900 mb-3">{{ step.title }}</h4>
+          <p class="text-gray-600 leading-relaxed">{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="mt-16 text-center">
+      <div class="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-3xl p-8 lg:p-12 text-white">
+        <h3 class="text-3xl font-bold mb-4">¿Listo para comenzar tu proyecto?</h3>
+        <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+          Hablemos sobre tus ideas y creemos algo increíble juntos
+        </p>
+        <app-button
+          variant="secondary"
+          size="lg"
+          (clicked)="scrollToContact()"
+          class="bg-white text-primary-600 hover:bg-gray-50"
+        >
+          <span class="mr-2">💬</span>
+          Iniciar Conversación
+        </app-button>
+      </div>
+    </div>
+  </div>
+</section>

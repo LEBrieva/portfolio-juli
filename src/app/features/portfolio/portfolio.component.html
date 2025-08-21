@@ -1,0 +1,194 @@
+<section id="portfolio" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        {{ translate('nav.portfolio') }}
+      </h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-8"></div>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        Explora una selección de mis trabajos más destacados en marketing digital y producción audiovisual.
+      </p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="flex justify-center mb-12">
+      <div class="bg-white rounded-full p-2 shadow-lg">
+        <div class="flex space-x-2">
+          <button
+            *ngFor="let category of categories"
+            (click)="setActiveCategory(category.id)"
+            [class]="getCategoryButtonClass(category.id)"
+            class="px-6 py-2 rounded-full font-medium transition-all duration-300"
+          >
+            <span class="mr-2">{{ category.icon }}</span>
+            {{ category.name }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      <div 
+        *ngFor="let project of filteredProjects; trackBy: trackByProjectId"
+        class="transform hover:scale-105 transition-transform duration-300"
+      >
+        <app-card
+          [title]="project.title"
+          [imageUrl]="project.imageUrl"
+          [imageAlt]="project.title"
+          [badge]="project.category"
+          [tags]="project.tags"
+          [variant]="'elevated'"
+          [padding]="'md'"
+          [hoverable]="true"
+          [showActions]="true"
+        >
+          <div slot="content">
+            <p class="text-gray-600 leading-relaxed mb-4">
+              {{ project.description }}
+            </p>
+          </div>
+          
+          <div slot="actions" class="flex flex-col sm:flex-row gap-3">
+            <app-button
+              *ngIf="project.demoUrl"
+              variant="primary"
+              size="sm"
+              [fullWidth]="true"
+              (clicked)="openProject(project.demoUrl!)"
+            >
+              <span class="mr-2">👁️</span>
+              Ver Demo
+            </app-button>
+            <app-button
+              *ngIf="project.projectUrl"
+              variant="outline"
+              size="sm"
+              [fullWidth]="true"
+              (clicked)="openProject(project.projectUrl!)"
+            >
+              <span class="mr-2">🔗</span>
+              Ver Más
+            </app-button>
+            <app-button
+              *ngIf="!project.demoUrl && !project.projectUrl"
+              variant="ghost"
+              size="sm"
+              [fullWidth]="true"
+              (clicked)="showProjectDetails(project)"
+            >
+              <span class="mr-2">ℹ️</span>
+              Ver Detalles
+            </app-button>
+          </div>
+        </app-card>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div *ngIf="hasMoreProjects" class="text-center">
+      <app-button
+        variant="outline"
+        size="lg"
+        (clicked)="loadMoreProjects()"
+        [loading]="isLoading()"
+      >
+        <span class="mr-2">⬇️</span>
+        Cargar Más Proyectos
+      </app-button>
+    </div>
+
+    <!-- Project Modal -->
+    <div 
+      *ngIf="selectedProject()"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+      (click)="closeModal()"
+    >
+      <div 
+        class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="relative">
+          <!-- Close button -->
+          <button
+            (click)="closeModal()"
+            class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-gray-600 hover:text-gray-900 transition-colors duration-200"
+          >
+            ✕
+          </button>
+          
+          <!-- Modal content -->
+          <div *ngIf="selectedProject() as project">
+            <div class="relative h-64 md:h-80 overflow-hidden rounded-t-2xl">
+              <img 
+                [src]="project.imageUrl" 
+                [alt]="project.title"
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {{ project.category }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="p-8">
+              <h3 class="text-3xl font-bold text-gray-900 mb-4">{{ project.title }}</h3>
+              <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                {{ project.description }}
+              </p>
+              
+              <!-- Extended description -->
+              <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                <h4 class="text-xl font-bold text-gray-900 mb-3">Detalles del Proyecto</h4>
+                <p class="text-gray-600 leading-relaxed">
+                  Este proyecto involucró un proceso completo de investigación, conceptualización y ejecución. 
+                  Se utilizaron las últimas técnicas de {{ project.category.toLowerCase() }} para crear una 
+                  experiencia única que conectara con la audiencia objetivo.
+                </p>
+              </div>
+              
+              <!-- Tags -->
+              <div class="mb-6">
+                <h4 class="text-lg font-bold text-gray-900 mb-3">Tecnologías Utilizadas</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span 
+                    *ngFor="let tag of project.tags" 
+                    class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium"
+                  >
+                    {{ tag }}
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Actions -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <app-button
+                  *ngIf="project.demoUrl"
+                  variant="primary"
+                  size="lg"
+                  (clicked)="openProject(project.demoUrl!)"
+                >
+                  <span class="mr-2">👁️</span>
+                  Ver Demo en Vivo
+                </app-button>
+                <app-button
+                  *ngIf="project.projectUrl"
+                  variant="outline"
+                  size="lg"
+                  (clicked)="openProject(project.projectUrl!)"
+                >
+                  <span class="mr-2">🔗</span>
+                  Ver Proyecto Completo
+                </app-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
