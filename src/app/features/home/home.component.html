@@ -1,39 +1,39 @@
 <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 relative overflow-hidden">
-  <!-- Background decorations -->
-  <div class="absolute top-20 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-bounce-gentle"></div>
-  <div class="absolute bottom-32 right-16 w-16 h-16 bg-secondary-200 rounded-full opacity-20 animate-bounce-gentle" style="animation-delay: 1s;"></div>
-  <div class="absolute top-1/2 right-8 w-12 h-12 bg-primary-300 rounded-full opacity-30 animate-bounce-gentle" style="animation-delay: 2s;"></div>
+  <!-- Background decorations - Hidden on mobile to prevent overflow -->
+  <div class="hidden md:block absolute top-20 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-bounce-gentle"></div>
+  <div class="hidden md:block absolute bottom-32 right-16 w-16 h-16 bg-secondary-200 rounded-full opacity-20 animate-bounce-gentle" style="animation-delay: 1s;"></div>
+  <div class="hidden lg:block absolute top-1/2 right-8 w-12 h-12 bg-primary-300 rounded-full opacity-30 animate-bounce-gentle" style="animation-delay: 2s;"></div>
   
-  <div class="container mx-auto px-4 py-20">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+  <div class="container mx-auto px-6 sm:px-8 md:px-4 py-20 max-w-full">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       
       <!-- Content -->
-      <div class="space-y-6 lg:order-1 animate-fade-in">
+      <div class="space-y-6 lg:order-1 animate-fade-in text-center lg:text-left">
         <div class="space-y-2">
           <p class="text-primary-600 font-medium text-lg animate-slide-up">
             {{ translate('home.greeting') }}
           </p>
-          <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight animate-slide-up" style="animation-delay: 0.2s;">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight animate-slide-up break-words" style="animation-delay: 0.2s;">
             <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
               Julieta Cuadra Rojas
             </span>
           </h1>
-          <h2 class="text-xl lg:text-2xl text-gray-700 font-medium animate-slide-up" style="animation-delay: 0.4s;">
+          <h2 class="text-lg sm:text-xl lg:text-2xl text-gray-700 font-medium animate-slide-up break-words" style="animation-delay: 0.4s;">
             {{ translate('home.title') }}
           </h2>
         </div>
         
-        <p class="text-lg text-gray-600 leading-relaxed max-w-2xl animate-slide-up" style="animation-delay: 0.6s;">
+        <p class="text-lg text-gray-600 leading-relaxed max-w-2xl animate-slide-up mx-auto lg:mx-0" style="animation-delay: 0.6s;">
           {{ translate('home.description') }}
         </p>
         
         <!-- CTA Buttons -->
-        <div class="flex flex-row gap-4 pt-6 animate-slide-up" style="animation-delay: 0.8s;">
+        <div class="flex flex-row gap-3 sm:gap-4 pt-6 animate-slide-up justify-center lg:justify-start" style="animation-delay: 0.8s;">
           <app-button 
             variant="primary" 
             size="lg"
             (clicked)="scrollToPortfolio()"
-            class="transform hover:scale-105 transition-transform duration-200"
+            class="flex-1 sm:flex-none transform hover:scale-105 transition-transform duration-200"
           >
             {{ translate('home.viewPortfolio') }}
           </app-button>
@@ -42,7 +42,7 @@
             variant="outline" 
             size="lg"
             (clicked)="scrollToContact()"
-            class="transform hover:scale-105 transition-transform duration-200"
+            class="flex-1 sm:flex-none transform hover:scale-105 transition-transform duration-200"
           >
             {{ translate('header.contact') }}
           </app-button>
@@ -50,10 +50,10 @@
       </div>
       
       <!-- Profile Image -->
-      <div class="lg:order-2 flex justify-center animate-fade-in" style="animation-delay: 0.5s;">
-        <div class="relative">
+      <div class="lg:order-2 flex flex-col items-center animate-fade-in px-8 md:px-0" style="animation-delay: 0.5s;">
+        <div class="relative max-w-full">
           <!-- Main image container -->
-          <div class="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-8 border-white">
+          <div class="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-2xl border-8 border-white mx-auto">
             <img 
               src="{{ profileImage }}" 
               alt="Juli Martínez - Profesional en Artes Audiovisuales"
@@ -64,8 +64,8 @@
             <div class="absolute inset-0 rounded-full border-4 border-gradient-to-r from-primary-400 to-secondary-400 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           
-          <!-- Floating Social Buttons -->
-          <div class="absolute -top-6 -right-6 animate-bounce-gentle">
+          <!-- Floating Social Buttons - Desktop/Tablet only -->
+          <div class="hidden sm:block absolute -top-6 -right-6 animate-bounce-gentle">
             <app-social-button
               platform="vimeo"
               url="https://vimeo.com/otheerside"
@@ -74,7 +74,7 @@
             ></app-social-button>
           </div>
           
-          <div class="absolute -bottom-4 -left-4 animate-bounce-gentle" style="animation-delay: 1.5s;">
+          <div class="hidden sm:block absolute -bottom-4 -left-4 animate-bounce-gentle" style="animation-delay: 1.5s;">
             <app-social-button
               platform="instagram"
               url="https://www.instagram.com/visagesvillages/"
@@ -83,7 +83,7 @@
             ></app-social-button>
           </div>
           
-          <div class="absolute top-1/4 -left-8 animate-bounce-gentle" style="animation-delay: 0.5s;">
+          <div class="hidden md:block absolute top-1/4 -left-8 animate-bounce-gentle" style="animation-delay: 0.5s;">
             <app-social-button
               platform="linkedin"
               url="https://www.linkedin.com/in/julietacuadrarojas/"
@@ -92,7 +92,7 @@
             ></app-social-button>
           </div>
           
-          <div class="absolute -bottom-4 -right-4 animate-bounce-gentle" style="animation-delay: 2s;">
+          <div class="hidden sm:block absolute -bottom-4 -right-4 animate-bounce-gentle" style="animation-delay: 2s;">
             <app-social-button
               platform="flickr"
               url="https://www.flickr.com/photos/otheerside/with/15999225719"
@@ -101,12 +101,40 @@
             ></app-social-button>
           </div>
         </div>
+        
+        <!-- Mobile Social Buttons - Below image on mobile -->
+        <div class="sm:hidden flex justify-center space-x-3 mt-6 mb-4">
+          <app-social-button
+            platform="vimeo"
+            url="https://vimeo.com/otheerside"
+            size="md"
+            variant="default"
+          ></app-social-button>
+          <app-social-button
+            platform="instagram"
+            url="https://www.instagram.com/visagesvillages/"
+            size="md"
+            variant="default"
+          ></app-social-button>
+          <app-social-button
+            platform="linkedin"
+            url="https://www.linkedin.com/in/julietacuadrarojas/"
+            size="md"
+            variant="default"
+          ></app-social-button>
+          <app-social-button
+            platform="flickr"
+            url="https://www.flickr.com/photos/otheerside/with/15999225719"
+            size="md"
+            variant="default"
+          ></app-social-button>
+        </div>
       </div>
       
     </div>
     
     <!-- Scroll indicator -->
-    <div class="flex justify-center mt-16 animate-bounce">
+    <div class="flex justify-center mt-8 sm:mt-16 animate-bounce">
       <button 
         (click)="scrollToNext()"
         class="text-gray-400 hover:text-primary-600 transition-colors duration-200"

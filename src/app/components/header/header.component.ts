@@ -9,8 +9,8 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
   standalone: true,
   imports: [CommonModule],
   template: `
-    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300">
-      <nav class="container mx-auto px-4 py-4">
+    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300 max-w-full overflow-hidden">
+      <nav class="container mx-auto px-4 py-4 max-w-full">
         <div class="flex items-center justify-between">
           <!-- Logo -->
           <div class="flex-shrink-0">
@@ -18,7 +18,7 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
               <div class="bg-gradient-to-r from-primary-600 to-secondary-600 p-2 rounded-lg transition-transform duration-300 group-hover:scale-105">
                 <span class="text-white font-bold text-xl">J</span>
               </div>
-              <span class="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+              <span class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                 JuliPortfolio
               </span>
             </a>
@@ -41,7 +41,7 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
           </div>
 
           <!-- Language Selector & Mobile Menu -->
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center space-x-4"></div>
             <!-- Language Dropdown -->
             <div class="relative" #languageDropdown>
               <button 
@@ -103,7 +103,6 @@ import { SupportedLanguage, Language, NavItem } from '../../shared/interfaces/co
               </svg>
             </button>
           </div>
-        </div>
 
         <!-- Mobile Navigation Menu -->
         <div 
