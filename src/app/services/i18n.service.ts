@@ -91,9 +91,50 @@ export class I18nService {
       pt: 'Sobre Mim'
     },
     'about.content': {
-      es: 'Mi pasión por las artes audiovisuales comenzó desde muy joven. Durante mi carrera universitaria, descubrí el poder del marketing digital como herramienta para amplificar el impacto del contenido creativo. Esta combinación única me ha permitido desarrollar estrategias innovadoras que fusionan la creatividad artística con objetivos comerciales concretos.',
-      en: 'My passion for audiovisual arts began at a very young age. During my university career, I discovered the power of digital marketing as a tool to amplify the impact of creative content. This unique combination has allowed me to develop innovative strategies that merge artistic creativity with concrete business objectives.',
-      pt: 'Minha paixão pelas artes audiovisuais começou desde muito jovem. Durante minha carreira universitária, descobri o poder do marketing digital como ferramenta para amplificar o impacto do conteúdo criativo. Essa combinação única me permitiu desenvolver estratégias inovadoras que fundem a criatividade artística com objetivos comerciais concretos.'
+      es: 'Especialista en marketing audiovisual con más de 8 años transformando ideas en resultados medibles.',
+      en: 'Audiovisual marketing specialist with over 8 years transforming ideas into measurable results.',
+      pt: 'Especialista em marketing audiovisual com mais de 8 anos transformando ideias em resultados mensuráveis.'
+    },
+    // Professional Journey Carousel
+    'about.journey.slide1.title': {
+      es: 'Mi Inicio Artístico',
+      en: 'My Artistic Beginning',
+      pt: 'Meu Início Artístico'
+    },
+    'about.journey.slide1.content': {
+      es: 'Soy Julieta Rojas, especialista en marketing audiovisual con más de 8 años de experiencia. Mi recorrido comenzó en el mundo del arte y la fotografía, lo que me dio una mirada estética que hoy aplico en la comunicación digital.',
+      en: 'I am Julieta Rojas, audiovisual marketing specialist with over 8 years of experience. My journey began in the world of art and photography, which gave me an aesthetic perspective that I now apply to digital communication.',
+      pt: 'Sou Julieta Rojas, especialista em marketing audiovisual com mais de 8 anos de experiência. Minha jornada começou no mundo da arte e da fotografia, o que me deu um olhar estético que hoje aplico na comunicação digital.'
+    },
+    'about.journey.slide2.title': {
+      es: 'Liderazgo y Resultados',
+      en: 'Leadership and Results',
+      pt: 'Liderança e Resultados'
+    },
+    'about.journey.slide2.content': {
+      es: 'Lideré equipos y campañas para marcas como Rusty Argentina, Vulk Clothing y Local\'s Only, diseñando estrategias omnicanal, lanzamientos y colaboraciones con influencers que generaron resultados medibles y cercanía con las audiencias.',
+      en: 'I led teams and campaigns for brands like Rusty Argentina, Vulk Clothing and Local\'s Only, designing omnichannel strategies, launches and influencer collaborations that generated measurable results and audience engagement.',
+      pt: 'Liderei equipes e campanhas para marcas como Rusty Argentina, Vulk Clothing e Local\'s Only, criando estratégias omnicanal, lançamentos e colaborações com influencers que geraram resultados mensuráveis e proximidade com as audiências.'
+    },
+    'about.journey.slide3.title': {
+      es: 'Nuevo Capítulo en Brasil',
+      en: 'New Chapter in Brazil',
+      pt: 'Novo Capítulo no Brasil'
+    },
+    'about.journey.slide3.content': {
+      es: 'En 2024 me mudé a Brasil para continuar mi carrera de manera remota, trabajando como consultora externa en marketing y marca personal. Hoy ayudo a empresas y profesionales a potenciar su presencia digital.',
+      en: 'In 2024 I moved to Brazil to continue my career remotely, working as an external consultant in marketing and personal branding. Today I help companies and professionals enhance their digital presence.',
+      pt: 'Em 2024 me mudei para o Brasil para continuar minha carreira de forma remota, trabalhando como consultora externa em marketing e marca pessoal. Hoje ajudo empresas e profissionais a potencializar sua presença digital.'
+    },
+    'about.journey.slide4.title': {
+      es: 'Mi Diferencial',
+      en: 'My Differentiator',
+      pt: 'Meu Diferencial'
+    },
+    'about.journey.slide4.content': {
+      es: 'Mi diferencial está en unir dos mundos: la sensibilidad artística de mis inicios con la planificación estratégica y analítica del marketing actual. Diseño narrativas auténticas y alcanzo objetivos de negocio con creatividad y estrategia.',
+      en: 'My differentiator lies in uniting two worlds: the artistic sensitivity of my beginnings with the strategic and analytical planning of modern marketing. I design authentic narratives and achieve business objectives with creativity and strategy.',
+      pt: 'Meu diferencial está em unir dois mundos: a sensibilidade artística dos meus inícios com o planejamento estratégico e analítico do marketing atual. Crio narrativas autênticas e alcanço objetivos de negócio com criatividade e estratégia.'
     },
 
     // Services

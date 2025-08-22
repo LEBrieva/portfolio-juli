@@ -24,6 +24,12 @@ interface Achievement {
   image?: string;
 }
 
+interface JourneySlide {
+  titleKey: string;
+  contentKey: string;
+  icon?: string;
+}
+
 @Component({
   selector: 'app-about',
   standalone: true,
@@ -37,17 +43,40 @@ export class AboutComponent implements OnDestroy {
   visibleSlides = 3;
   isMobile = false;
   
+  // Journey Carousel properties
+  currentJourneySlide = 0;
+  
   // Touch/Swipe properties
   private touchStartX = 0;
   private touchEndX = 0;
   private minSwipeDistance = 50;
   
   personalInfo = [
-    { icon: '👩', label: 'Nombre', value: 'Julieta Cuadra Rojas' },
+    { icon: '👩', label: 'Nombre', value: 'Julieta Rojas' },
     { icon: '📍', label: 'Ubicación', value: 'Rio de Janeiro, Brasil' },
     { icon: '🎓', label: 'Educación', value: 'Marketing Audiovisual' },
-    { icon: '💼', label: 'Experiencia', value: '7+ años en Marketing' },
+    { icon: '💼', label: 'Experiencia', value: '8+ años en Marketing' },
     { icon: '📧', label: 'Email', value: 'julirojas.mkt@gmail.com' }
+  ];
+
+  // Professional Journey Slides
+  journeySlides: JourneySlide[] = [
+    {
+      titleKey: 'about.journey.slide1.title',
+      contentKey: 'about.journey.slide1.content'
+    },
+    {
+      titleKey: 'about.journey.slide2.title',
+      contentKey: 'about.journey.slide2.content'
+    },
+    {
+      titleKey: 'about.journey.slide3.title',
+      contentKey: 'about.journey.slide3.content'
+    },
+    {
+      titleKey: 'about.journey.slide4.title',
+      contentKey: 'about.journey.slide4.content'
+    }
   ];
 
   skills: Skill[] = [
@@ -62,32 +91,39 @@ export class AboutComponent implements OnDestroy {
 
   experiences: Experience[] = [
     {
-      title: 'Directora Creativa Senior',
-      company: 'AgenciaCreativa Plus',
-      period: '2021 - Presente',
-      description: 'Liderazgo de equipo creativo, desarrollo de estrategias de marca y producción de contenido audiovisual para clientes premium.',
-      icon: '🚀'
+      title: 'Consultora Externa',
+      company: 'Freelance - Brasil',
+      period: '2024 - Presente',
+      description: 'Consultoría en marketing digital y marca personal para empresas y profesionales. Diseño de estrategias de comunicación y narrativas auténticas.',
+      icon: '🌎'
     },
     {
-      title: 'Especialista en Marketing Digital',
-      company: 'MediaGroup Argentina',
-      period: '2019 - 2021',
-      description: 'Gestión integral de campañas digitales, creación de contenido multimedia y análisis de métricas para optimización.',
-      icon: '💡'
+      title: 'Líder de Marketing Digital',
+      company: 'Rusty Argentina',
+      period: '2022 - 2024',
+      description: 'Liderazgo de campañas omnicanal, lanzamientos de productos y colaboraciones con influencers. Generación de resultados medibles y engagement con audiencias.',
+      icon: '🏄'
     },
     {
-      title: 'Productora Audiovisual',
-      company: 'Estudios Creativos SRL',
-      period: '2017 - 2019',
-      description: 'Producción de videos comerciales, documentales corporativos y contenido para redes sociales.',
-      icon: '🎥'
+      title: 'Estratega de Marca',
+      company: 'Vulk Clothing',
+      period: '2020 - 2022',
+      description: 'Desarrollo de identidad de marca, estrategias de contenido y gestión de redes sociales para posicionamiento en el mercado de moda urbana.',
+      icon: '👕'
     },
     {
-      title: 'Asistente de Producción',
-      company: 'Canal Visual TV',
-      period: '2016 - 2017',
-      description: 'Apoyo en producciones televisivas, manejo de equipos técnicos y coordinación logística.',
-      icon: '📺'
+      title: 'Community Manager',
+      company: "Local's Only",
+      period: '2018 - 2020',
+      description: 'Creación de contenido audiovisual, gestión de comunidades online y desarrollo de campañas creativas para marcas locales.',
+      icon: '📱'
+    },
+    {
+      title: 'Fotógrafa y Artista Visual',
+      company: 'Independiente',
+      period: '2016 - 2018',
+      description: 'Inicio de mi carrera en el mundo del arte y la fotografía, desarrollando proyectos creativos y colaboraciones artísticas.',
+      icon: '📸'
     }
   ];
 
@@ -143,12 +179,14 @@ export class AboutComponent implements OnDestroy {
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', () => this.checkScreenSize());
     }
+    // Journey carousel ready
   }
 
   ngOnDestroy(): void {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', () => this.checkScreenSize());
     }
+    // Journey carousel cleanup
   }
 
   checkScreenSize(): void {
@@ -233,5 +271,18 @@ export class AboutComponent implements OnDestroy {
     else if (swipeDistance < -this.minSwipeDistance) {
       this.prevSlide();
     }
+  }
+
+  // Journey Carousel Methods
+  nextJourneySlide(): void {
+    this.currentJourneySlide = (this.currentJourneySlide + 1) % this.journeySlides.length;
+  }
+
+  prevJourneySlide(): void {
+    this.currentJourneySlide = this.currentJourneySlide === 0 ? this.journeySlides.length - 1 : this.currentJourneySlide - 1;
+  }
+
+  goToJourneySlide(index: number): void {
+    this.currentJourneySlide = index;
   }
 }

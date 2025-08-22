@@ -11,6 +11,79 @@
       </p>
     </div>
 
+    <!-- Professional Journey Carousel -->
+    <div class="mb-16 max-w-3xl mx-auto">
+      <div class="relative bg-gradient-to-br from-primary-50 via-white to-secondary-50 rounded-3xl shadow-xl overflow-hidden">
+        
+        <!-- Carousel Content -->
+        <div class="p-6 md:p-8">
+          <div class="relative min-h-[180px] text-center">
+            <!-- Slides -->
+            <div *ngFor="let slide of journeySlides; let i = index"
+                 class="transition-all duration-500 ease-in-out"
+                 [class.opacity-100]="i === currentJourneySlide"
+                 [class.opacity-0]="i !== currentJourneySlide"
+                 [class.translate-x-0]="i === currentJourneySlide"
+                 [class.translate-x-full]="i > currentJourneySlide"
+                 [class.-translate-x-full]="i < currentJourneySlide"
+                 [style.position]="i === currentJourneySlide ? 'relative' : 'absolute'"
+                 [style.top]="'0'"
+                 [style.left]="'0'"
+                 [style.right]="'0'">
+              
+              <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 animate-fadeIn">
+                {{ translate(slide.titleKey) }}
+              </h3>
+              
+              <p class="text-base md:text-lg text-gray-700 leading-relaxed animate-slideUp max-w-3xl mx-auto">
+                {{ translate(slide.contentKey) }}
+              </p>
+            </div>
+          </div>
+          
+          <!-- Navigation Arrows -->
+          <div class="flex justify-between items-center mt-6">
+            <button (click)="prevJourneySlide()"
+                    type="button"
+                    style="z-index: 10; pointer-events: auto;"
+                    class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            
+            <!-- Dots Indicator -->
+            <div class="flex space-x-2">
+              <button *ngFor="let slide of journeySlides; let i = index"
+                      (click)="goToJourneySlide(i)"
+                      class="transition-all duration-300"
+                      [class.w-8]="i === currentJourneySlide"
+                      [class.w-2]="i !== currentJourneySlide"
+                      [class.h-2]="true"
+                      [class.rounded-full]="true"
+                      [class.bg-primary-600]="i === currentJourneySlide"
+                      [class.bg-gray-300]="i !== currentJourneySlide"
+                      [class.hover:bg-primary-400]="i !== currentJourneySlide">
+              </button>
+            </div>
+            
+            <button (click)="nextJourneySlide()"
+                    type="button"
+                    style="z-index: 10; pointer-events: auto;"
+                    class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
+              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-full blur-3xl opacity-30" style="z-index: 1; pointer-events: none;"></div>
+        <div class="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-secondary-200 to-primary-200 rounded-full blur-3xl opacity-30" style="z-index: 1; pointer-events: none;"></div>
+      </div>
+    </div>
+
     <div class="grid lg:grid-cols-2 gap-12 items-start mb-16">
       <!-- Personal Info -->
       <div class="space-y-8">
