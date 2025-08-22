@@ -20,7 +20,6 @@ interface Experience {
 interface Achievement {
   title: string;
   description: string;
-  icon: string;
   year: string;
   image?: string;
 }
@@ -88,32 +87,40 @@ export class AboutComponent {
 
   achievements: Achievement[] = [
     {
-      title: 'Premio Marketing Excellence',
-      description: 'Reconocimiento por la mejor campaña digital del año en la categoría entretenimiento.',
-      icon: '🏆',
+      title: 'Community Manager',
+      description: 'Certificación en Community Manager.',
       year: '2023',
-      image: 'diplomas/diploma-1.jpg'
+      image: 'diplomas/community-manager.jpg'
     },
     {
-      title: 'Festival de Cine Independiente',
-      description: 'Mejor dirección de arte en cortometraje documental "Voces Urbanas".',
-      icon: '🎬',
-      year: '2022',
-      image: 'diplomas/diploma-2.jpg'
-    },
-    {
-      title: 'Certificación Google Ads',
-      description: 'Certificación avanzada en Google Ads y Analytics para marketing digital.',
-      icon: '📜',
-      year: '2021',
-      image: 'diplomas/diploma-3.jpg'
+      title: 'Escritura Estrategica RRSS',
+      description: 'Certificación en Escritura Estrategica RRSS.',
+      year: '2023',
+      image: 'diplomas/escritura-estrategica-rrss.jpg'
     },
     {
       title: 'Liderazgo para Equipos Creativos',
-      description: 'Certificación en liderazgo y gestión de equipos creativos multidisciplinarios.',
-      icon: '👥',
-      year: '2020',
-      image: 'diplomas/diploma-4.jpg'
+      description: 'Certificación en Liderazgo para Equipos Creativos.',
+      year: '2023',
+      image: 'diplomas/liderazgo-para-equipos-creativos.jpg'
+    },
+    {
+      title: 'Estrategias de Branding',
+      description: 'Certificación en Estrategias de Branding.',
+      year: '2023',
+      image: 'diplomas/estrategias-branding-empresas.jpg'
+    },
+    {
+      title: 'Fotografía',
+      description: 'Certificación en Fotografía.',
+      year: '2019',
+      image: 'diplomas/fotografia-cruceros.jpeg'
+    },
+    {
+      title: 'Técnicatura en Artes Audiovisuales',
+      description: 'Técnicatura en Artes Audiovisuales.',
+      year: '2017',
+      image: 'diplomas/tecnicatura-artes-audiovisuales.jpg'
     }
   ];
 

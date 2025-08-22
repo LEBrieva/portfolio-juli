@@ -117,11 +117,11 @@
             >
               <div slot="content" style="height: 100%; display: flex; flex-direction: column;">
                 <!-- Diploma Image -->
-                <div class="w-full h-48 mb-4 rounded-lg overflow-hidden shadow-md" style="flex-shrink: 0;">
+                <div class="w-full h-48 mb-4 rounded-lg overflow-hidden shadow-md bg-white" style="flex-shrink: 0;">
                   <img 
                     [src]="achievement.image" 
                     [alt]="achievement.title"
-                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    class="w-full h-full object-contain p-2"
                   />
                 </div>
                 <div class="text-primary-600 font-bold text-lg mb-2">{{ achievement.year }}</div>
