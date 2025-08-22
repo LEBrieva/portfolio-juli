@@ -85,10 +85,10 @@
       
       <!-- Carousel Container -->
       <div class="relative max-w-6xl mx-auto">
-        <!-- Navigation Buttons -->
+        <!-- Navigation Buttons - Hidden on mobile -->
         <button 
           (click)="prevSlide()"
-          class="carousel-nav-btn absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 z-10 shadow-lg rounded-full p-3"
+          class="carousel-nav-btn absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 z-10 shadow-lg rounded-full p-3 hidden md:block"
         >
           <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -97,7 +97,7 @@
 
         <button 
           (click)="nextSlide()"
-          class="carousel-nav-btn absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-8 z-10 shadow-lg rounded-full p-3"
+          class="carousel-nav-btn absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-8 z-10 shadow-lg rounded-full p-3 hidden md:block"
         >
           <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -106,7 +106,12 @@
 
         <!-- Achievements Carousel Track -->
         <div class="overflow-hidden">
-          <div class="grid grid-cols-3 gap-8">
+          <div 
+            class="grid grid-cols-1 md:grid-cols-3 gap-8"
+            (touchstart)="onTouchStart($event)"
+            (touchmove)="onTouchMove($event)"
+            (touchend)="onTouchEnd($event)"
+          >
             <app-card 
               *ngFor="let achievement of getVisibleAchievements()"
               [variant]="'elevated'"
@@ -130,6 +135,16 @@
               </div>
             </app-card>
           </div>
+        </div>
+
+        <!-- Carousel Indicators/Bullets - Only visible on mobile -->
+        <div class="flex justify-center mt-8 space-x-2 md:hidden">
+          <button
+            *ngFor="let bullet of getBullets(); let i = index"
+            (click)="goToSlide(i)"
+            class="carousel-indicator w-3 h-3 rounded-full transition-all duration-300"
+            [class]="currentSlide === i ? 'bg-primary-600' : 'bg-gray-300 hover:bg-gray-400'"
+          ></button>
         </div>
       </div>
     </div>

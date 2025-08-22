@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../../shared/ui/card/card.component';
 import { I18nService } from '../../services/i18n.service';
@@ -31,10 +31,16 @@ interface Achievement {
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent {
+export class AboutComponent implements OnDestroy {
   // Carrusel properties
   currentSlide = 0;
   visibleSlides = 3;
+  isMobile = false;
+  
+  // Touch/Swipe properties
+  private touchStartX = 0;
+  private touchEndX = 0;
+  private minSwipeDistance = 50;
   
   personalInfo = [
     { icon: '👩', label: 'Nombre', value: 'Julieta Cuadra Rojas' },
@@ -131,7 +137,26 @@ export class AboutComponent {
     { value: '15', label: 'Premios Obtenidos' }
   ];
 
-  constructor(private i18nService: I18nService) {}
+  constructor(private i18nService: I18nService) {
+    this.checkScreenSize();
+    // Listen to window resize events
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => this.checkScreenSize());
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', () => this.checkScreenSize());
+    }
+  }
+
+  checkScreenSize(): void {
+    if (typeof window !== 'undefined') {
+      this.isMobile = window.innerWidth < 768;
+      this.visibleSlides = this.isMobile ? 1 : 3;
+    }
+  }
 
   translate(key: string): string {
     return this.i18nService.translate(key);
@@ -154,12 +179,59 @@ export class AboutComponent {
   }
 
   getVisibleAchievements(): Achievement[] {
-    // Crear array circular para mostrar siempre 3 elementos
+    // Crear array circular para mostrar elementos según visibleSlides
     const result: Achievement[] = [];
     for (let i = 0; i < this.visibleSlides; i++) {
       const index = (this.currentSlide + i) % this.achievements.length;
       result.push(this.achievements[index]);
     }
     return result;
+  }
+
+  getBullets(): number[] {
+    // En móvil: tantos bullets como certificados totales
+    // En escritorio: tantos bullets como "grupos" de 3 (pero solo será el total/3)
+    if (this.isMobile) {
+      return Array.from({ length: this.achievements.length }, (_, i) => i);
+    } else {
+      // En escritorio mantener la lógica original
+      const totalGroups = Math.ceil(this.achievements.length / this.visibleSlides);
+      return Array.from({ length: totalGroups }, (_, i) => i);
+    }
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlide = index;
+  }
+
+  // Touch/Swipe event handlers
+  onTouchStart(event: TouchEvent): void {
+    if (!this.isMobile) return;
+    this.touchStartX = event.touches[0].clientX;
+  }
+
+  onTouchMove(event: TouchEvent): void {
+    if (!this.isMobile) return;
+    // Prevent default to avoid scrolling
+    event.preventDefault();
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    if (!this.isMobile) return;
+    this.touchEndX = event.changedTouches[0].clientX;
+    this.handleSwipe();
+  }
+
+  private handleSwipe(): void {
+    const swipeDistance = this.touchStartX - this.touchEndX;
+    
+    // Swipe left (next slide)
+    if (swipeDistance > this.minSwipeDistance) {
+      this.nextSlide();
+    }
+    // Swipe right (previous slide)
+    else if (swipeDistance < -this.minSwipeDistance) {
+      this.prevSlide();
+    }
   }
 }
