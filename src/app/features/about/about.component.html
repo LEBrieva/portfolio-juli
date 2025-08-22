@@ -44,19 +44,22 @@
             </div>
           </div>
           
-          <!-- Navigation Arrows -->
-          <div class="flex justify-between items-center mt-6">
-            <button (click)="prevJourneySlide()"
-                    type="button"
-                    style="z-index: 10; pointer-events: auto;"
-                    class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
-              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-              </svg>
-            </button>
+          <!-- Navigation Controls -->
+          <div class="flex md:justify-between justify-center items-center mt-6">
+            <!-- Left Arrow (desktop only) -->
+            <div class="hidden md:block">
+              <button (click)="prevJourneySlide()"
+                      type="button"
+                      style="z-index: 10; pointer-events: auto;"
+                      class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+            </div>
             
             <!-- Dots Indicator -->
-            <div class="flex space-x-2">
+            <div class="flex space-x-3">
               <button *ngFor="let slide of journeySlides; let i = index"
                       (click)="goToJourneySlide(i)"
                       class="transition-all duration-300"
@@ -70,14 +73,17 @@
               </button>
             </div>
             
-            <button (click)="nextJourneySlide()"
-                    type="button"
-                    style="z-index: 10; pointer-events: auto;"
-                    class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
-              <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
+            <!-- Right Arrow (desktop only) -->
+            <div class="hidden md:block">
+              <button (click)="nextJourneySlide()"
+                      type="button"
+                      style="z-index: 10; pointer-events: auto;"
+                      class="p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300 hover:scale-110 relative">
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
         
