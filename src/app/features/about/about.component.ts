@@ -22,6 +22,7 @@ interface Achievement {
   description: string;
   icon: string;
   year: string;
+  image?: string;
 }
 
 @Component({
@@ -32,6 +33,10 @@ interface Achievement {
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
+  // Carrusel properties
+  currentSlide = 0;
+  visibleSlides = 3;
+  
   personalInfo = [
     { icon: '👩', label: 'Nombre', value: 'Julieta Cuadra Rojas' },
     { icon: '📍', label: 'Ubicación', value: 'Rio de Janeiro, Brasil' },
@@ -86,19 +91,29 @@ export class AboutComponent {
       title: 'Premio Marketing Excellence',
       description: 'Reconocimiento por la mejor campaña digital del año en la categoría entretenimiento.',
       icon: '🏆',
-      year: '2023'
+      year: '2023',
+      image: 'diplomas/diploma-1.jpg'
     },
     {
       title: 'Festival de Cine Independiente',
       description: 'Mejor dirección de arte en cortometraje documental "Voces Urbanas".',
       icon: '🎬',
-      year: '2022'
+      year: '2022',
+      image: 'diplomas/diploma-2.jpg'
     },
     {
       title: 'Certificación Google Ads',
       description: 'Certificación avanzada en Google Ads y Analytics para marketing digital.',
       icon: '📜',
-      year: '2021'
+      year: '2021',
+      image: 'diplomas/diploma-3.jpg'
+    },
+    {
+      title: 'Liderazgo para Equipos Creativos',
+      description: 'Certificación en liderazgo y gestión de equipos creativos multidisciplinarios.',
+      icon: '👥',
+      year: '2020',
+      image: 'diplomas/diploma-4.jpg'
     }
   ];
 
@@ -113,5 +128,31 @@ export class AboutComponent {
 
   translate(key: string): string {
     return this.i18nService.translate(key);
+  }
+
+  // Carrusel methods
+  nextSlide(): void {
+    // Mover de 1 en 1: posición 0 -> 1 -> 2 -> 3 -> 0 -> 1...
+    this.currentSlide = (this.currentSlide + 1) % this.achievements.length;
+  }
+
+  prevSlide(): void {
+    // Mover hacia atrás de 1 en 1: posición 3 -> 2 -> 1 -> 0 -> 3 -> 2...
+    this.currentSlide = this.currentSlide === 0 ? this.achievements.length - 1 : this.currentSlide - 1;
+  }
+
+  getTransformValue(): string {
+    // Cada slide se mueve 33.33% (100% / 3 visibles)
+    return `translateX(-${(this.currentSlide * 100) / this.visibleSlides}%)`;
+  }
+
+  getVisibleAchievements(): Achievement[] {
+    // Crear array circular para mostrar siempre 3 elementos
+    const result: Achievement[] = [];
+    for (let i = 0; i < this.visibleSlides; i++) {
+      const index = (this.currentSlide + i) % this.achievements.length;
+      result.push(this.achievements[index]);
+    }
+    return result;
   }
 }

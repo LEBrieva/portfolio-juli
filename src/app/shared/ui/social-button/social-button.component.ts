@@ -102,11 +102,11 @@ export class SocialButtonComponent {
 
   get customIconPath(): string {
     const iconPaths: Record<string, string> = {
-      linkedin: 'linkedin.ico',
-      instagram: 'instagram.ico',
-      vimeo: 'vimeo.ico',
-      flickr: 'flickr.ico',
-      behance: 'behance.ico'
+      linkedin: 'iconos/linkedin.ico',
+      instagram: 'iconos/instagram.ico',
+      vimeo: 'iconos/vimeo.ico',
+      flickr: 'iconos/flickr.ico',
+      behance: 'iconos/behance.ico'
     };
 
     return iconPaths[this.platform] || '';

@@ -20,6 +20,7 @@ export class CardComponent {
   @Input() padding: 'none' | 'sm' | 'md' | 'lg' = 'md';
   @Input() showActions = false;
   @Input() hoverable = true;
+  @Input() customStyles?: { [key: string]: string };
 
   get cardClasses(): string {
     const baseClasses = 'bg-white rounded-xl overflow-hidden transition-all duration-300';

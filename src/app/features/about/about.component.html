@@ -79,28 +79,58 @@
       </div>
     </div>
 
-    <!-- Achievements -->
+    <!-- Achievements Carousel -->
     <div class="mt-16">
       <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">Logros Destacados</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <app-card 
-          *ngFor="let achievement of achievements"
-          [variant]="'elevated'"
-          [padding]="'md'"
-          [hoverable]="true"
-          class="text-center"
+      
+      <!-- Carousel Container -->
+      <div class="relative max-w-6xl mx-auto">
+        <!-- Navigation Buttons -->
+        <button 
+          (click)="prevSlide()"
+          class="carousel-nav-btn absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-8 z-10 shadow-lg rounded-full p-3"
         >
-          <div slot="content">
-            <div class="text-center mb-4">
-              <div class="w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span class="text-white text-2xl">{{ achievement.icon }}</span>
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </button>
+
+        <button 
+          (click)="nextSlide()"
+          class="carousel-nav-btn absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-8 z-10 shadow-lg rounded-full p-3"
+        >
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+
+        <!-- Achievements Carousel Track -->
+        <div class="overflow-hidden">
+          <div class="grid grid-cols-3 gap-8">
+            <app-card 
+              *ngFor="let achievement of getVisibleAchievements()"
+              [variant]="'elevated'"
+              [padding]="'md'"
+              [hoverable]="true"
+              [customStyles]="{ 'height': '400px', 'display': 'flex', 'flex-direction': 'column' }"
+              class="text-center"
+            >
+              <div slot="content" style="height: 100%; display: flex; flex-direction: column;">
+                <!-- Diploma Image -->
+                <div class="w-full h-48 mb-4 rounded-lg overflow-hidden shadow-md" style="flex-shrink: 0;">
+                  <img 
+                    [src]="achievement.image" 
+                    [alt]="achievement.title"
+                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div class="text-primary-600 font-bold text-lg mb-2">{{ achievement.year }}</div>
+                <h4 class="text-xl font-bold text-gray-900 mb-3" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical;">{{ achievement.title }}</h4>
+                <p class="text-gray-600 leading-relaxed" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical;">{{ achievement.description }}</p>
               </div>
-              <div class="text-primary-600 font-bold text-lg mb-2">{{ achievement.year }}</div>
-              <h4 class="text-xl font-bold text-gray-900 mb-3">{{ achievement.title }}</h4>
-              <p class="text-gray-600 leading-relaxed">{{ achievement.description }}</p>
-            </div>
+            </app-card>
           </div>
-        </app-card>
+        </div>
       </div>
     </div>
 
