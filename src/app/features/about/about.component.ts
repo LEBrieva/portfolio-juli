@@ -117,8 +117,8 @@ export class AboutComponent {
       image: 'diplomas/fotografia-cruceros.jpeg'
     },
     {
-      title: 'Técnicatura en Artes Audiovisuales',
-      description: 'Técnicatura en Artes Audiovisuales.',
+      title: 'Tecnicatura en Artes Audiovisuales',
+      description: 'Tecnicatura en Artes Audiovisuales.',
       year: '2017',
       image: 'diplomas/tecnicatura-artes-audiovisuales.jpg'
     }
