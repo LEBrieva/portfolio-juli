@@ -43,6 +43,15 @@
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Mobile height fix for journey carousel */
+@media (max-width: 768px) {
+  .journey-content-container {
+    height: 280px !important;
+    min-height: 280px !important;
+    max-height: 280px !important;
+  }
+}
+
 /* Carousel specific styles */
 .carousel-container {
   position: relative;

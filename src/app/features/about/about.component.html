@@ -17,27 +17,30 @@
         
         <!-- Carousel Content -->
         <div class="p-6 md:p-8">
-          <div class="relative min-h-[180px] text-center">
+          <div class="relative min-h-[280px] md:min-h-[180px] text-center journey-content-container"
+               (touchstart)="onJourneyTouchStart($event)"
+               (touchmove)="onJourneyTouchMove($event)"
+               (touchend)="onJourneyTouchEnd($event)">
             <!-- Slides -->
             <div *ngFor="let slide of journeySlides; let i = index"
-                 class="transition-all duration-500 ease-in-out"
+                 class="transition-all duration-500 ease-in-out absolute inset-0 flex flex-col justify-center"
                  [class.opacity-100]="i === currentJourneySlide"
                  [class.opacity-0]="i !== currentJourneySlide"
                  [class.translate-x-0]="i === currentJourneySlide"
                  [class.translate-x-full]="i > currentJourneySlide"
                  [class.-translate-x-full]="i < currentJourneySlide"
-                 [style.position]="i === currentJourneySlide ? 'relative' : 'absolute'"
-                 [style.top]="'0'"
-                 [style.left]="'0'"
-                 [style.right]="'0'">
+                 [class.pointer-events-auto]="i === currentJourneySlide"
+                 [class.pointer-events-none]="i !== currentJourneySlide">
               
-              <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 animate-fadeIn">
-                {{ translate(slide.titleKey) }}
-              </h3>
-              
-              <p class="text-base md:text-lg text-gray-700 leading-relaxed animate-slideUp max-w-3xl mx-auto">
-                {{ translate(slide.contentKey) }}
-              </p>
+              <div class="px-2 md:px-0">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 animate-fadeIn">
+                  {{ translate(slide.titleKey) }}
+                </h3>
+                
+                <p class="text-sm md:text-lg text-gray-700 leading-relaxed animate-slideUp max-w-3xl mx-auto overflow-hidden">
+                  {{ translate(slide.contentKey) }}
+                </p>
+              </div>
             </div>
           </div>
           

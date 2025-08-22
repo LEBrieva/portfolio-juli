@@ -285,4 +285,35 @@ export class AboutComponent implements OnDestroy {
   goToJourneySlide(index: number): void {
     this.currentJourneySlide = index;
   }
+
+  // Journey Carousel Touch/Swipe handlers
+  private journeyTouchStartX = 0;
+  private journeyTouchEndX = 0;
+
+  onJourneyTouchStart(event: TouchEvent): void {
+    this.journeyTouchStartX = event.touches[0].clientX;
+  }
+
+  onJourneyTouchMove(event: TouchEvent): void {
+    // Prevent default to avoid scrolling
+    event.preventDefault();
+  }
+
+  onJourneyTouchEnd(event: TouchEvent): void {
+    this.journeyTouchEndX = event.changedTouches[0].clientX;
+    this.handleJourneySwipe();
+  }
+
+  private handleJourneySwipe(): void {
+    const swipeDistance = this.journeyTouchStartX - this.journeyTouchEndX;
+    
+    // Swipe left (next slide)
+    if (swipeDistance > this.minSwipeDistance) {
+      this.nextJourneySlide();
+    }
+    // Swipe right (previous slide)
+    else if (swipeDistance < -this.minSwipeDistance) {
+      this.prevJourneySlide();
+    }
+  }
 }
