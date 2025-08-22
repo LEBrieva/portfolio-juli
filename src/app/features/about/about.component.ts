@@ -35,9 +35,9 @@ export class AboutComponent {
   personalInfo = [
     { icon: '👩', label: 'Nombre', value: 'Julieta Cuadra Rojas' },
     { icon: '📍', label: 'Ubicación', value: 'Rio de Janeiro, Brasil' },
-    { icon: '🎓', label: 'Educación', value: 'Lic. en Artes Audiovisuales' },
-    { icon: '💼', label: 'Experiencia', value: '5+ años en Marketing' },
-    { icon: '📧', label: 'Email', value: 'cuadrarojasjulieta@gmail.com' }
+    { icon: '🎓', label: 'Educación', value: 'Marketing Audiovisual' },
+    { icon: '💼', label: 'Experiencia', value: '7+ años en Marketing' },
+    { icon: '📧', label: 'Email', value: 'julirojas.mkt@gmail.com' }
   ];
 
   skills: Skill[] = [

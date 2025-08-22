@@ -75,8 +75,8 @@ export class I18nService {
     },
     'home.description': {
       es: 'Apasionada por el marketing digital y el storytelling de marca. Con experiencia en estrategia de contenido, engagement de audiencia y liderazgo de equipos creativos para desarrollar campañas de alto impacto.',
-      en: 'Licensed in Audiovisual Arts with over 8 years of experience in digital marketing. Specialized in creating impactful visual content that connects brands with their audience.',
-      pt: 'Licenciada em Artes Audiovisuais com mais de 8 anos de experiência em marketing digital. Especializada em criar conteúdo visual impactante que conecta marcas com seu público.'
+      en: 'Passionate about digital marketing and brand storytelling. With experience in content strategy, audience engagement, and leading creative teams to develop high-impact campaigns.',
+      pt: 'Apaixonada por marketing digital e storytelling de marca. Com experiência em estratégia de conteúdo, engajamento de audiência e liderança de equipes criativas para desenvolver campanhas de alto impacto.'
     },
     'home.viewPortfolio': {
       es: 'Ver Portfolio',
