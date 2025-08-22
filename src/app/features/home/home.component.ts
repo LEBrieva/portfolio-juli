@@ -19,9 +19,9 @@ export class HomeComponent {
   
   socialLinks = [
     { platform: 'linkedin' as const, url: 'https://www.linkedin.com/in/julietacuadrarojas/' },
-    { platform: 'instagram' as const, url: 'https://www.instagram.com/visagesvillages/' },
-    { platform: 'behance' as const, url: 'https://behance.net/julimartinez' },
-    { platform: 'email' as const, url: 'mailto:juli@juliportfolio.com' }
+    { platform: 'instagram' as const, url: 'https://www.instagram.com/julietsquareds/' },
+    { platform: 'behance' as const, url: 'https://www.behance.net/julietacr' },
+    { platform: 'flickr' as const, url: 'https://www.flickr.com/photos/otheerside/' },
   ];
 
   constructor(private i18nService: I18nService) {}

@@ -90,7 +90,7 @@ export class SocialButtonComponent {
       instagram: true,
       vimeo: true,
       flickr: true,
-      behance: false,
+      behance: true,
       email: false,
       github: false,
       dribbble: false,
@@ -105,7 +105,8 @@ export class SocialButtonComponent {
       linkedin: 'linkedin.ico',
       instagram: 'instagram.ico',
       vimeo: 'vimeo.ico',
-      flickr: 'flickr.ico'
+      flickr: 'flickr.ico',
+      behance: 'behance.ico'
     };
 
     return iconPaths[this.platform] || '';

@@ -27,9 +27,14 @@
 }
 
 .social-button.behance:hover {
-  background-color: #1769ff;
+  background-color: #000000;
   color: white;
-  box-shadow: 0 10px 25px rgba(23, 105, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Filtro para convertir el ícono negro a blanco en hover */
+.social-button.behance:hover img {
+  filter: brightness(0) invert(1);
 }
 
 .social-button.email:hover {
