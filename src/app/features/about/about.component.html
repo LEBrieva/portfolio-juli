@@ -126,7 +126,7 @@
             [class.opacity-0]="!professionalSkillsOpen"
             [class.opacity-100]="professionalSkillsOpen"
             class="overflow-hidden transition-all duration-300 ease-in-out">
-            <div class="bg-rose-200 p-8 text-gray-800">
+            <div class="bg-rose-200 p-8 text-gray-800 max-h-96 md:max-h-none overflow-y-auto md:overflow-visible">
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div *ngFor="let skill of professionalSkills.skills" 
                      class="bg-white bg-opacity-60 backdrop-blur-sm rounded-xl p-4 hover:bg-opacity-80 transition-all duration-300 border border-gray-200 shadow-sm">
@@ -171,7 +171,7 @@
             [class.opacity-0]="!toolsOpen"
             [class.opacity-100]="toolsOpen"
             class="overflow-hidden transition-all duration-300 ease-in-out">
-            <div class="p-8 bg-sky-200">
+            <div class="p-8 bg-sky-200 max-h-96 md:max-h-none overflow-y-auto md:overflow-visible">
               <div class="grid md:grid-cols-2 gap-8">
                 <div *ngFor="let subcategory of toolsSubcategories" 
                      class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -226,7 +226,7 @@
             [class.opacity-0]="!socialOpen"
             [class.opacity-100]="socialOpen"
             class="overflow-hidden transition-all duration-300 ease-in-out">
-            <div class="p-8 bg-orange-200">
+            <div class="p-8 bg-orange-200 max-h-96 md:max-h-none overflow-y-auto md:overflow-visible">
               <!-- Primera fila: primeras 3 tarjetas -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <div *ngFor="let network of socialNetworks.slice(0, 3); let i = index" 
