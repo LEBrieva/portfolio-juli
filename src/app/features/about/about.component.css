@@ -181,3 +181,330 @@
   outline-offset: 2px;
 }
 
+/* Floating Bubbles Styles */
+@keyframes bounce-gentle {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes rotate-weird {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-natural {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-12px) translateX(3px);
+  }
+  50% {
+    transform: translateY(-6px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(4px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes rotate-blob {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.floating-bubble {
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.floating-bubble:hover {
+  transform: scale(1.05);
+}
+
+/* Floating Animation for Bubbles */
+.weird-blob-1 {
+  animation: float-natural 6s ease-in-out infinite;
+}
+
+.weird-blob-2 {
+  animation: float-natural 8s ease-in-out infinite;
+}
+
+.weird-blob-3 {
+  animation: float-natural 7s ease-in-out infinite;
+}
+
+.weird-blob-4 {
+  animation: float-natural 9s ease-in-out infinite;
+}
+
+.weird-blob-5 {
+  animation: float-natural 5.5s ease-in-out infinite;
+}
+
+/* Weird Shapes - Only the shape rotates */
+.weird-shape-1 {
+  border-radius: 73% 27% 83% 17% / 72% 23% 77% 28%;
+  width: 160px;
+  height: 140px;
+  animation: rotate-blob 15s linear infinite;
+}
+
+.weird-shape-2 {
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  width: 150px;
+  height: 160px;
+  animation: rotate-blob 18s linear infinite;
+}
+
+.weird-shape-3 {
+  border-radius: 54% 46% 48% 52% / 64% 68% 32% 36%;
+  width: 140px;
+  height: 150px;
+  animation: rotate-blob 20s linear infinite;
+}
+
+.weird-shape-4 {
+  border-radius: 31% 69% 70% 30% / 32% 40% 60% 68%;
+  width: 170px;
+  height: 145px;
+  animation: rotate-blob 16s linear infinite;
+}
+
+.weird-shape-5 {
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+  width: 155px;
+  height: 165px;
+  animation: rotate-blob 22s linear infinite;
+}
+
+/* Content stays straight - counter-rotates */
+.blob-content {
+  animation: counter-rotate 15s linear infinite;
+}
+
+.weird-shape-2 .blob-content {
+  animation: counter-rotate 18s linear infinite;
+}
+
+.weird-shape-3 .blob-content {
+  animation: counter-rotate 20s linear infinite;
+}
+
+.weird-shape-4 .blob-content {
+  animation: counter-rotate 16s linear infinite;
+}
+
+.weird-shape-5 .blob-content {
+  animation: counter-rotate 22s linear infinite;
+}
+
+/* Enhanced Visual Effects */
+.weird-shape-1,
+.weird-shape-2,
+.weird-shape-3,
+.weird-shape-4,
+.weird-shape-5 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.weird-shape-1:hover,
+.weird-shape-2:hover,
+.weird-shape-3:hover,
+.weird-shape-4:hover,
+.weird-shape-5:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Glowing effect */
+.weird-shape-1::before,
+.weird-shape-2::before,
+.weird-shape-3::before,
+.weird-shape-4::before,
+.weird-shape-5::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floating-bubble:hover .weird-shape-1::before,
+.floating-bubble:hover .weird-shape-2::before,
+.floating-bubble:hover .weird-shape-3::before,
+.floating-bubble:hover .weird-shape-4::before,
+.floating-bubble:hover .weird-shape-5::before {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1536px) {
+  .weird-shape-1, .weird-shape-2, .weird-shape-3, .weird-shape-4, .weird-shape-5 {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 1280px) {
+  .weird-shape-1, .weird-shape-2, .weird-shape-3, .weird-shape-4, .weird-shape-5 {
+    transform: scale(0.7);
+  }
+}
+
+/* Side Accordion Styles */
+.side-accordion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 50;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.side-accordion-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70vw;
+  max-width: 800px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 25px -5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 51;
+}
+
+.side-accordion-professional {
+  background: linear-gradient(135deg, #fef2f2 0%, #fda4af 100%);
+}
+
+.side-accordion-tools {
+  background: linear-gradient(135deg, #f0f9ff 0%, #7dd3fc 100%);
+}
+
+.side-accordion-social {
+  background: linear-gradient(135deg, #fff7ed 0%, #fdba74 100%);
+}
+
+.side-accordion-creative {
+  background: linear-gradient(135deg, #f0fdf4 0%, #86efac 100%);
+}
+
+.side-accordion-languages {
+  background: linear-gradient(135deg, #faf5ff 0%, #c4b5fd 100%);
+}
+
+.side-accordion-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 52;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #374151;
+}
+
+.side-accordion-close:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  color: #ef4444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive adjustments for side accordion */
+@media (max-width: 1024px) {
+  .side-accordion-panel {
+    width: 85vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .side-accordion-panel {
+    width: 95vw;
+  }
+}
+

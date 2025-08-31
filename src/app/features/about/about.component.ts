@@ -92,6 +92,9 @@ export class AboutComponent implements OnDestroy {
   socialOpen = false;
   languagesOpen = false;
   
+  // Side accordion states (desktop only)
+  activeSideAccordion: string | null = null;
+  
   // Flip cards state for social networks
   flippedCards = new Set<number>();
   
@@ -344,6 +347,15 @@ export class AboutComponent implements OnDestroy {
 
   toggleLanguages(): void {
     this.languagesOpen = !this.languagesOpen;
+  }
+
+  // Side accordion methods
+  openSideAccordion(accordionType: string): void {
+    this.activeSideAccordion = this.activeSideAccordion === accordionType ? null : accordionType;
+  }
+
+  closeSideAccordion(): void {
+    this.activeSideAccordion = null;
   }
 
   // Flip card methods

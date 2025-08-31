@@ -1,4 +1,4 @@
-<section id="about" class="py-20 bg-white">
+<section id="about" class="py-20 bg-white relative">
   <div class="container mx-auto px-4">
     <!-- Section Header -->
     <div class="text-center mb-16">
@@ -93,8 +93,70 @@
       </div>
     </div>
 
-    <!-- Nueva estructura de habilidades y competencias -->
-    <div class="space-y-16 mb-16">
+    <!-- Floating Bubbles - Desktop Only (Solo alrededor de Sobre Mí y Carousel) -->
+    <div class="hidden lg:block">
+      <!-- Floating Bubble 1: Competencias Profesionales -->
+      <div class="floating-bubble weird-blob-1 absolute z-20" 
+           style="left: 5%; top: 5%; animation-delay: 0s;"
+           (click)="openSideAccordion('professional')">
+        <div class="bg-rose-300 hover:bg-rose-400 text-gray-800 p-8 shadow-xl border-4 border-white weird-shape-1">
+          <div class="text-center blob-content">
+            <span class="text-base font-bold block uppercase">Competencias</span>
+            <span class="text-base font-bold block uppercase">Profesionales</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bubble 2: Experiencia en Redes Sociales -->
+      <div class="floating-bubble weird-blob-2 absolute z-20" 
+           style="left: 8%; top: 25%; animation-delay: 1s;"
+           (click)="openSideAccordion('social')">
+        <div class="bg-orange-300 hover:bg-orange-400 text-gray-800 p-8 shadow-xl border-4 border-white weird-shape-2">
+          <div class="text-center blob-content">
+            <span class="text-base font-bold block uppercase">Experiencia en</span>
+            <span class="text-base font-bold block uppercase">RRSS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bubble 3: Idiomas -->
+      <div class="floating-bubble weird-blob-3 absolute z-20" 
+           style="left: 3%; top: 45%; animation-delay: 2s;"
+           (click)="openSideAccordion('languages')">
+        <div class="bg-violet-300 hover:bg-violet-400 text-gray-800 p-8 shadow-xl border-4 border-white weird-shape-3">
+          <div class="text-center blob-content">
+            <span class="text-base font-bold block uppercase">Idiomas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bubble 4: Herramientas y Plataformas -->
+      <div class="floating-bubble weird-blob-4 absolute z-20" 
+           style="right: 6%; top: 8%; animation-delay: 0.5s;"
+           (click)="openSideAccordion('tools')">
+        <div class="bg-sky-300 hover:bg-sky-400 text-gray-800 p-8 shadow-xl border-4 border-white weird-shape-4">
+          <div class="text-center blob-content">
+            <span class="text-base font-bold block uppercase">Herramientas y</span>
+            <span class="text-base font-bold block uppercase">Plataformas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Bubble 5: Producción & Creatividad -->
+      <div class="floating-bubble weird-blob-5 absolute z-20" 
+           style="right: 4%; top: 35%; animation-delay: 1.5s;"
+           (click)="openSideAccordion('creative')">
+        <div class="bg-emerald-300 hover:bg-emerald-400 text-gray-800 p-8 shadow-xl border-4 border-white weird-shape-5">
+          <div class="text-center blob-content">
+            <span class="text-base font-bold block uppercase">Producción &</span>
+            <span class="text-base font-bold block uppercase">Creatividad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Traditional Accordions - Mobile/Tablet Only -->
+    <div class="lg:hidden space-y-16 mb-16">
       
       <!-- Competencias Profesionales -->
       <div class="max-w-6xl mx-auto">
@@ -492,5 +554,176 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+    <!-- Side Accordion - Desktop Only -->
+    <div *ngIf="activeSideAccordion" class="side-accordion-overlay hidden lg:block" (click)="closeSideAccordion()">
+      <div class="side-accordion-panel" [ngClass]="'side-accordion-' + activeSideAccordion" (click)="$event.stopPropagation()">
+        
+        <!-- Close Button -->
+        <button class="side-accordion-close" (click)="closeSideAccordion()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Professional Skills Content -->
+        <div *ngIf="activeSideAccordion === 'professional'" class="p-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ translate(professionalSkills.titleKey) }}</h3>
+          <p class="text-lg text-gray-700 mb-8">{{ translate(professionalSkills.descriptionKey) }}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div *ngFor="let skill of professionalSkills.skills" 
+                 class="bg-white bg-opacity-80 rounded-xl p-4 hover:bg-opacity-90 transition-all duration-300 border border-gray-200 shadow-sm">
+              <div class="flex items-center space-x-3">
+                <span class="text-xl">{{ skill.icon }}</span>
+                <span class="font-medium text-gray-800">{{ skill.name }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools Content -->
+        <div *ngIf="activeSideAccordion === 'tools'" class="p-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ translate('about.skills.tools.title') }}</h3>
+          <p class="text-lg text-gray-700 mb-8">{{ translate('about.skills.tools.description') }}</p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div *ngFor="let subcategory of toolsSubcategories" 
+                 class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div class="bg-cyan-300 p-4">
+                <h4 class="text-lg font-bold text-gray-800">{{ subcategory.name }}</h4>
+              </div>
+              <div class="p-4">
+                <div class="grid grid-cols-1 gap-2">
+                  <div *ngFor="let tool of subcategory.tools"
+                       class="flex items-center space-x-3 p-2 bg-gray-50 rounded-lg">
+                    <span class="text-sm">{{ tool.icon }}</span>
+                    <span class="font-medium text-gray-800 text-sm">{{ tool.name }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Networks Content -->
+        <div *ngIf="activeSideAccordion === 'social'" class="p-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ translate('about.social.title') }}</h3>
+          <p class="text-lg text-gray-700 mb-8">{{ translate('about.social.description') }}</p>
+          <!-- Primera fila: primeras 3 tarjetas -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+            <div *ngFor="let network of socialNetworks.slice(0, 3); let i = index" 
+                 class="flip-card h-32 cursor-pointer"
+                 (click)="toggleFlipCard(i)">
+              <div class="flip-card-inner" [class.flipped]="isCardFlipped(i)">
+                <!-- Front of card -->
+                <div class="flip-card-front">
+                  <div [class]="network.color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg'">
+                    <span class="text-2xl mb-2">{{ network.icon }}</span>
+                    <h4 class="text-sm font-bold text-center px-2">{{ network.platform }}</h4>
+                    <span class="text-xs font-medium px-2 py-1 mt-1 rounded-full bg-white bg-opacity-70">
+                      {{ network.level }}
+                    </span>
+                  </div>
+                </div>
+                <!-- Back of card -->
+                <div class="flip-card-back">
+                  <div [class]="network.color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg p-3'">
+                    <h4 class="text-sm font-bold text-center mb-2">{{ network.platform }}</h4>
+                    <p class="text-xs text-center leading-relaxed">{{ network.description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Segunda fila: últimas 2 tarjetas centradas -->
+          <div class="flex justify-center gap-4">
+            <div class="flip-card h-32 cursor-pointer w-32" (click)="toggleFlipCard(3)">
+              <div class="flip-card-inner" [class.flipped]="isCardFlipped(3)">
+                <!-- Front of card -->
+                <div class="flip-card-front">
+                  <div [class]="socialNetworks[3].color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg'">
+                    <span class="text-2xl mb-2">{{ socialNetworks[3].icon }}</span>
+                    <h4 class="text-sm font-bold text-center px-2">{{ socialNetworks[3].platform }}</h4>
+                    <span class="text-xs font-medium px-2 py-1 mt-1 rounded-full bg-white bg-opacity-70">
+                      {{ socialNetworks[3].level }}
+                    </span>
+                  </div>
+                </div>
+                <!-- Back of card -->
+                <div class="flip-card-back">
+                  <div [class]="socialNetworks[3].color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg p-3'">
+                    <h4 class="text-sm font-bold text-center mb-2">{{ socialNetworks[3].platform }}</h4>
+                    <p class="text-xs text-center leading-relaxed">{{ socialNetworks[3].description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Twitter -->
+            <div class="flip-card h-32 cursor-pointer w-32" (click)="toggleFlipCard(4)">
+              <div class="flip-card-inner" [class.flipped]="isCardFlipped(4)">
+                <!-- Front of card -->
+                <div class="flip-card-front">
+                  <div [class]="socialNetworks[4].color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg'">
+                    <span class="text-2xl mb-2">{{ socialNetworks[4].icon }}</span>
+                    <h4 class="text-sm font-bold text-center px-2">{{ socialNetworks[4].platform }}</h4>
+                    <span class="text-xs font-medium px-2 py-1 mt-1 rounded-full bg-white bg-opacity-70">
+                      {{ socialNetworks[4].level }}
+                    </span>
+                  </div>
+                </div>
+                <!-- Back of card -->
+                <div class="flip-card-back">
+                  <div [class]="socialNetworks[4].color + ' h-full rounded-xl flex flex-col items-center justify-center text-gray-800 shadow-lg p-3'">
+                    <h4 class="text-sm font-bold text-center mb-2">{{ socialNetworks[4].platform }}</h4>
+                    <p class="text-xs text-center leading-relaxed">{{ socialNetworks[4].description }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Creative Skills Content -->
+        <div *ngIf="activeSideAccordion === 'creative'" class="p-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ translate('about.skills.creative.title') }}</h3>
+          <p class="text-lg text-gray-700 mb-8">{{ translate('about.skills.creative.description') }}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div *ngFor="let skill of creativeSkills" 
+                 class="flex flex-col p-4 bg-white bg-opacity-80 rounded-xl hover:bg-opacity-90 transition-all duration-300 border border-gray-200 shadow-sm">
+              <div class="flex items-center space-x-3 mb-2">
+                <span class="text-xl">{{ skill.icon }}</span>
+                <h4 class="font-bold text-gray-800 text-sm">{{ skill.name }}</h4>
+              </div>
+              <span [class]="'text-xs font-medium px-2 py-1 rounded-full self-start ' + getLevelBadgeClass(skill.level)">
+                {{ skill.level }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Languages Content -->
+        <div *ngIf="activeSideAccordion === 'languages'" class="p-8">
+          <h3 class="text-3xl font-bold text-gray-900 mb-6">{{ translate('about.languages.title') }}</h3>
+          <p class="text-lg text-gray-700 mb-8">{{ translate('about.languages.description') }}</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div *ngFor="let language of languages" 
+                 class="flex flex-col p-4 bg-white bg-opacity-80 rounded-xl hover:bg-opacity-90 transition-all duration-300 border border-gray-200 shadow-sm">
+              <div class="flex items-center space-x-3 mb-2">
+                <span class="text-xl flex-shrink-0">{{ language.flag }}</span>
+                <h4 class="font-bold text-gray-800 text-sm">{{ language.name }}</h4>
+              </div>
+              <span [class]="'text-xs font-medium px-2 py-1 rounded-full self-start ' + getLevelBadgeClass(language.level)">
+                {{ language.level }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
 </section>
 
