@@ -273,6 +273,11 @@ export class I18nService {
       en: 'Services',
       pt: 'Serviços'
     },
+    'services.description': {
+      es: 'Ofrezco soluciones integrales que combinan creatividad audiovisual con estrategias de marketing efectivas.',
+      en: 'I offer comprehensive solutions that combine audiovisual creativity with effective marketing strategies.',
+      pt: 'Ofereço soluções integrais que combinam criatividade audiovisual com estratégias de marketing eficazes.'
+    },
     // Contact
     'contact.title': {
       es: 'Contacto',
