@@ -216,9 +216,9 @@ export class ServicesComponent {
       classes += 'border-transparent ';
     }
     
-    // Z-index elevado cuando está expandida
+    // Z-index elevado cuando está expandida (pero menor que el header)
     if (isExpanded) {
-      classes += 'z-50 ';
+      classes += 'z-40 ';
     }
     
     return classes;
