@@ -243,13 +243,58 @@ export class ServicesComponent {
   }
 
   selectService(service: Service): void {
-    // Simulate service selection - could open a modal or redirect to contact
-    this.scrollToContact();
+    // Create WhatsApp message with service information
+    const phoneNumber = '5522991026770'; // +55 22 99102-6770 without + and spaces
+    const message = `¡Hola! Me interesa obtener más información sobre el servicio "${service.title}".
+
+Descripción del servicio:
+${service.description}
+
+Me gustaría conocer más detalles sobre:
+• Precio y formas de pago
+• Tiempos de entrega
+• Proceso de trabajo
+• Próximos pasos
+
+¡Espero tu respuesta!`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
   }
 
   selectPlan(plan: ServicePlan): void {
-    this.selectedServicePlan.set(plan);
-    this.scrollToContact();
+    // Create WhatsApp message with plan information
+    const phoneNumber = '5522991026770'; // +55 22 99102-6770 without + and spaces
+    const message = `¡Hola! Me interesa el plan "${plan.name}" (${plan.price}/${plan.duration}).
+
+Descripción del plan:
+${plan.description}
+
+Características incluidas:
+${plan.features.map(feature => `• ${feature}`).join('\n')}
+
+Me gustaría conocer más detalles sobre:
+• Proceso de contratación
+• Formas de pago
+• Cuándo podríamos comenzar
+• Próximos pasos
+
+¡Espero tu respuesta!`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
   }
 
   scrollToContact(): void {
@@ -263,5 +308,28 @@ export class ServicesComponent {
         behavior: 'smooth'
       });
     }
+  }
+
+  startConversation(): void {
+    // Create WhatsApp message for general inquiry
+    const phoneNumber = '5522991026770'; // +55 22 99102-6770 without + and spaces
+    const message = `¡Hola! Me interesa conocer más sobre tus servicios.
+
+Me gustaría que conversemos sobre:
+• Mis objetivos y necesidades
+• Qué servicio sería el más adecuado para mí
+• Precios y modalidades de trabajo
+• Próximos pasos
+
+¡Espero poder trabajar contigo!`;
+
+    // Encode the message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
   }
 }

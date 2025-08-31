@@ -38,7 +38,7 @@ export class ContactComponent {
     },
     {
       type: 'phone',
-      value: '+54 9 11 1234-5678',
+      value: '+55 22 99102-6770',
       label: 'WhatsApp',
       icon: '📱'
     },
@@ -60,7 +60,7 @@ export class ContactComponent {
     { platform: 'LinkedIn', url: 'https://linkedin.com/in/julimartinez', icon: '💼', label: 'LinkedIn' },
     { platform: 'Instagram', url: 'https://instagram.com/julimartinez_', icon: '📸', label: 'Instagram' },
     { platform: 'Behance', url: 'https://behance.net/julimartinez', icon: '🎨', label: 'Behance' },
-    { platform: 'WhatsApp', url: 'https://wa.me/5491112345678', icon: '💬', label: 'WhatsApp' }
+    { platform: 'WhatsApp', url: 'https://wa.me/5522991026770', icon: '💬', label: 'WhatsApp' }
   ];
 
   workingHours = [
