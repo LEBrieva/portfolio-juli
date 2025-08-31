@@ -136,6 +136,103 @@ export class I18nService {
       en: 'My differentiator lies in uniting two worlds: the artistic sensitivity of my beginnings with the strategic and analytical planning of modern marketing. I design authentic narratives and achieve business objectives with creativity and strategy.',
       pt: 'Meu diferencial está em unir dois mundos: a sensibilidade artística dos meus inícios com o planejamento estratégico e analítico do marketing atual. Crio narrativas autênticas e alcanço objetivos de negócio com criatividade e estratégia.'
     },
+    // Personal Info
+    'about.personalInfo.title': {
+      es: 'Información Personal',
+      en: 'Personal Information',
+      pt: 'Informação Pessoal'
+    },
+    'about.personalInfo.name': {
+      es: 'Nombre',
+      en: 'Name',
+      pt: 'Nome'
+    },
+    'about.personalInfo.location': {
+      es: 'Ubicación',
+      en: 'Location',
+      pt: 'Localização'
+    },
+    'about.personalInfo.education': {
+      es: 'Educación',
+      en: 'Education',
+      pt: 'Educação'
+    },
+    'about.personalInfo.experience': {
+      es: 'Experiencia',
+      en: 'Experience',
+      pt: 'Experiência'
+    },
+    'about.personalInfo.email': {
+      es: 'Email',
+      en: 'Email',
+      pt: 'Email'
+    },
+    // Certifications
+    'about.certifications.title': {
+      es: 'Certificaciones',
+      en: 'Certifications',
+      pt: 'Certificações'
+    },
+    'about.certifications.communityManager': {
+      es: 'Community Manager',
+      en: 'Community Manager',
+      pt: 'Community Manager'
+    },
+    'about.certifications.escrituraEstrategicaRrss': {
+      es: 'Escritura Estrategica RRSS',
+      en: 'Strategic RRSS Writing',
+      pt: 'Escrita Estratégica RRSS'
+    },
+    'about.certifications.liderazgoParaEquiposCreativos': {
+      es: 'Liderazgo para Equipos Creativos',
+      en: 'Leadership for Creative Teams',
+      pt: 'Liderança para Equipes Criativas'
+    },
+    'about.certifications.estrategiasDeBranding': {
+      es: 'Estrategias de Branding',
+      en: 'Branding Strategies',
+      pt: 'Estratégias de Branding'
+    },
+    'about.certifications.fotografia': {
+      es: 'Fotografía',
+      en: 'Photography',
+      pt: 'Fotografia'
+    },
+    'about.certifications.tecnicaturaEnArtesAudiovisuales': {
+      es: 'Tecnicatura en Artes Audiovisuales',
+      en: 'Technical Degree in Audiovisual Arts',
+      pt: 'Técnica em Artes Audiovisuales'
+    },
+    'about.certifications.communityManagerDescription': {
+      es: 'Certificación en Community Manager.',
+      en: 'Certification in Community Manager.',
+      pt: 'Certificação em Community Manager.'
+    },
+    'about.certifications.escrituraEstrategicaRrssDescription': {
+      es: 'Certificación en Escritura Estrategica RRSS.',
+      en: 'Certification in Strategic RRSS Writing.',
+      pt: 'Certificação em Escrita Estratégica RRSS.'
+    },
+    'about.certifications.liderazgoParaEquiposCreativosDescription': {
+      es: 'Certificación en Liderazgo para Equipos Creativos.',
+      en: 'Certification in Leadership for Creative Teams.',
+      pt: 'Certificação em Liderança para Equipes Criativas.'
+    },
+    'about.certifications.estrategiasDeBrandingDescription': {
+      es: 'Certificación en Estrategias de Branding.',
+      en: 'Certification in Branding Strategies.',
+      pt: 'Certificação em Estratégias de Branding.'
+    },
+    'about.certifications.fotografiaDescription': {
+      es: 'Certificación en Fotografía.',
+      en: 'Certification in Photography.',
+      pt: 'Certificação em Fotografia.'
+    },
+    'about.certifications.tecnicaturaEnArtesAudiovisualesDescription': {
+      es: 'Certificación en Tecnicatura en Artes Audiovisuales.',
+      en: 'Certification in Technical Degree in Audiovisual Arts.',
+      pt: 'Certificação em Técnica em Artes Audiovisuales.'
+    },
 
     // Services
     'services.title': {

@@ -18,7 +18,7 @@ interface Experience {
 }
 
 interface Achievement {
-  title: string;
+  labelTitle: string;
   description: string;
   year: string;
   image?: string;
@@ -52,11 +52,11 @@ export class AboutComponent implements OnDestroy {
   private minSwipeDistance = 50;
   
   personalInfo = [
-    { icon: '👩', label: 'Nombre', value: 'Julieta Rojas' },
-    { icon: '📍', label: 'Ubicación', value: 'Rio de Janeiro, Brasil' },
-    { icon: '🎓', label: 'Educación', value: 'Marketing Audiovisual' },
-    { icon: '💼', label: 'Experiencia', value: '8+ años en Marketing' },
-    { icon: '📧', label: 'Email', value: 'julirojas.mkt@gmail.com' }
+    { icon: '👩', labelKey: 'about.personalInfo.name', value: 'Julieta Rojas' },
+    { icon: '📍', labelKey: 'about.personalInfo.location', value: 'Rio de Janeiro, Brasil' },
+    { icon: '🎓', labelKey: 'about.personalInfo.education', value: 'Marketing Audiovisual' },
+    { icon: '💼', labelKey: 'about.personalInfo.experience', value: '8+ años en Marketing' },
+    { icon: '📧', labelKey: 'about.personalInfo.email', value: 'julirojas.mkt@gmail.com' }
   ];
 
   // Professional Journey Slides
@@ -129,38 +129,38 @@ export class AboutComponent implements OnDestroy {
 
   achievements: Achievement[] = [
     {
-      title: 'Community Manager',
-      description: 'Certificación en Community Manager.',
+      labelTitle: 'about.certifications.communityManager',
+      description: 'about.certifications.communityManagerDescription',
       year: '2023',
       image: 'diplomas/community-manager.jpg'
     },
     {
-      title: 'Escritura Estrategica RRSS',
-      description: 'Certificación en Escritura Estrategica RRSS.',
+      labelTitle: 'about.certifications.escrituraEstrategicaRrss',
+      description: 'about.certifications.escrituraEstrategicaRrssDescription',
       year: '2023',
       image: 'diplomas/escritura-estrategica-rrss.jpg'
     },
     {
-      title: 'Liderazgo para Equipos Creativos',
-      description: 'Certificación en Liderazgo para Equipos Creativos.',
+      labelTitle: 'about.certifications.liderazgoParaEquiposCreativos',
+      description: 'about.certifications.liderazgoParaEquiposCreativosDescription',
       year: '2023',
       image: 'diplomas/liderazgo-para-equipos-creativos.jpg'
     },
     {
-      title: 'Estrategias de Branding',
-      description: 'Certificación en Estrategias de Branding.',
+      labelTitle: 'about.certifications.estrategiasDeBranding',
+      description: 'about.certifications.estrategiasDeBrandingDescription',
       year: '2023',
       image: 'diplomas/estrategias-branding-empresas.jpg'
     },
     {
-      title: 'Fotografía',
-      description: 'Certificación en Fotografía.',
+      labelTitle: 'about.certifications.fotografia',
+      description: 'about.certifications.fotografiaDescription',
       year: '2019',
       image: 'diplomas/fotografia-cruceros.jpeg'
     },
     {
-      title: 'Tecnicatura en Artes Audiovisuales',
-      description: 'Tecnicatura en Artes Audiovisuales.',
+      labelTitle: 'about.certifications.tecnicaturaEnArtesAudiovisuales',
+      description: 'about.certifications.tecnicaturaEnArtesAudiovisualesDescription',
       year: '2017',
       image: 'diplomas/tecnicatura-artes-audiovisuales.jpg'
     }
