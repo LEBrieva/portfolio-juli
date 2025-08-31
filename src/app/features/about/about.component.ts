@@ -30,6 +30,45 @@ interface JourneySlide {
   icon?: string;
 }
 
+// Nueva estructura para habilidades profesionales
+interface ProfessionalSkill {
+  name: string;
+  icon: string;
+}
+
+interface SkillCategory {
+  titleKey: string;
+  descriptionKey: string;
+  icon: string;
+  skills: ProfessionalSkill[];
+}
+
+interface ToolSubcategory {
+  name: string;
+  tools: ProfessionalSkill[];
+}
+
+interface CreativeSkill {
+  name: string;
+  level: string;
+  icon: string;
+}
+
+interface SocialNetwork {
+  platform: string;
+  level: string;
+  description: string;
+  icon: string;
+  color: string;
+}
+
+interface Language {
+  name: string;
+  level: string;
+  flag: string;
+  description?: string;
+}
+
 @Component({
   selector: 'app-about',
   standalone: true,
@@ -46,20 +85,22 @@ export class AboutComponent implements OnDestroy {
   // Journey Carousel properties
   currentJourneySlide = 0;
   
+  // Accordion states
+  professionalSkillsOpen = false;
+  toolsOpen = false;
+  creativeOpen = false;
+  socialOpen = false;
+  languagesOpen = false;
+  
+  // Flip cards state for social networks
+  flippedCards = new Set<number>();
+  
   // Touch/Swipe properties
   private touchStartX = 0;
   private touchEndX = 0;
   private minSwipeDistance = 50;
   
-  personalInfo = [
-    { icon: '👩', labelKey: 'about.personalInfo.name', value: 'Julieta Rojas' },
-    { icon: '📍', labelKey: 'about.personalInfo.location', value: 'Rio de Janeiro, Brasil' },
-    { icon: '🎓', labelKey: 'about.personalInfo.education', value: 'Marketing Audiovisual' },
-    { icon: '💼', labelKey: 'about.personalInfo.experience', value: '8+ años en Marketing' },
-    { icon: '📧', labelKey: 'about.personalInfo.email', value: 'julirojas.mkt@gmail.com' }
-  ];
-
-  // Professional Journey Slides
+  // Professional Journey Slides (mantenido)
   journeySlides: JourneySlide[] = [
     {
       titleKey: 'about.journey.slide1.title',
@@ -79,52 +120,128 @@ export class AboutComponent implements OnDestroy {
     }
   ];
 
-  skills: Skill[] = [
-    { name: 'Adobe Creative Suite', level: 50, icon: '🎨' },
-    { name: 'Dirección de Arte', level: 80, icon: '👩🏼‍🎨' },
-    { name: 'Marketing Digital', level: 70, icon: '💻' },
-    { name: 'Producción Audiovisual', level: 70, icon: '🎬' },
-    { name: 'Social Media Management', level: 80, icon: '📱' },
-    { name: 'Estrategia de Contenidos', level: 100, icon: '📝' },
-    { name: 'Fotografía', level: 60, icon: '📸' }
+  // Nueva estructura de habilidades profesionales
+  professionalSkills: SkillCategory = {
+    titleKey: 'about.skills.professional.title',
+    descriptionKey: 'about.skills.professional.description',
+    icon: '🧠',
+    skills: [
+      { name: 'Estrategia de Redes Sociales', icon: '📊' },
+      { name: 'Estrategia de Contenido & Copywriting Creativo', icon: '📝' },
+      { name: 'Branding & Comunicación Estratégica', icon: '🏢' },
+      { name: 'Marketing Omnicanal', icon: '🎯' },
+      { name: 'Influencer Marketing & Programas de Afiliados', icon: '👑' },
+      { name: 'SEO & SEO Local (Google Business Profile)', icon: '🔍' },
+      { name: 'Liderazgo de equipos creativos', icon: '👥' },
+      { name: 'Análisis de Mercado y Segmentación', icon: '📈' },
+      { name: 'Gestión de Crisis y Planes de Contingencia', icon: '⚠️' },
+      { name: 'Planificación Estratégica y Gestión de Proyectos', icon: '📋' },
+      { name: 'Trabajo en equipo y colaboración ágil', icon: '🤝' },
+      { name: 'Marca Personal (posicionamiento y narrativa)', icon: '💼' }
+    ]
+  };
+
+  // Herramientas y Plataformas organizadas por subcategorías
+  toolsSubcategories: ToolSubcategory[] = [
+    {
+      name: 'Gestión/Colaboración',
+      tools: [
+        { name: 'Notion', icon: '📝' },
+        { name: 'Craft', icon: '📄' },
+        { name: 'Basecamp', icon: '🏕️' },
+        { name: 'Asana', icon: '📋' },
+        { name: 'Google Workspace', icon: '📊' },
+        { name: 'Google Calendar', icon: '📅' }
+      ]
+    },
+    {
+      name: 'Social & Negocio',
+      tools: [
+        { name: 'Meta Business Suite', icon: '📘' },
+        { name: 'Google Business Profile', icon: '🏢' },
+        { name: 'LinkedIn', icon: '💼' },
+        { name: 'Instagram/Threads', icon: '📸' },
+        { name: 'TikTok', icon: '🎵' },
+        { name: 'Strava', icon: '🏃‍♀️' },
+        { name: 'Shopify', icon: '🛒' }
+      ]
+    },
+    {
+      name: 'IA (co‑creación y productividad)',
+      tools: [
+        { name: 'ChatGPT (Plus)', icon: '🤖' },
+        { name: 'Claude', icon: '🧠' },
+        { name: 'Gamma', icon: '🎨' },
+        { name: 'Canva AI', icon: '✨' }
+      ]
+    },
+    {
+      name: 'Edición & diseño rápido',
+      tools: [
+        { name: 'Canva (Pro)', icon: '🎨' },
+        { name: 'CapCut', icon: '✂️' }
+      ]
+    }
   ];
 
-  experiences: Experience[] = [
+  // Producción & Creatividad
+  creativeSkills: CreativeSkill[] = [
+    { name: 'Adobe Premiere', level: 'Intermedio-Avanzado', icon: '🎬' },
+    { name: 'Lightroom', level: 'Avanzado', icon: '📸' },
+    { name: 'Illustrator', level: 'Intermedio', icon: '🎨' },
+    { name: 'Photoshop', level: 'Básico-Intermedio', icon: '🖼️' },
+    { name: 'Producción multimedia', level: '', icon: '🎥' },
+    { name: 'Fotografía', level: '', icon: '📷' },
+    { name: 'Edición de video', level: '', icon: '🎞️' },
+    { name: 'Redacción publicitaria', level: '', icon: '✍️' }
+  ];
+
+  // Experiencia en Redes Sociales
+  socialNetworks: SocialNetwork[] = [
     {
-      title: 'Consultora Externa',
-      company: 'Freelance - Brasil',
-      period: '2024 - Presente',
-      description: 'Consultoría en marketing digital y marca personal para empresas y profesionales. Diseño de estrategias de comunicación y narrativas auténticas.',
-      icon: '🌎'
+      platform: 'Instagram / Facebook / Threads',
+      level: 'Avanzado',
+      description: 'Estrategia editorial, coordinación de paid con performance teams, optimización de contenido y formato (reels, UGC, colaboraciones)',
+      icon: '📸',
+      color: 'bg-pink-300'
     },
     {
-      title: 'Líder de Marketing Digital',
-      company: 'Rusty Argentina',
-      period: '2022 - 2024',
-      description: 'Liderazgo de campañas omnicanal, lanzamientos de productos y colaboraciones con influencers. Generación de resultados medibles y engagement con audiencias.',
-      icon: '🏄'
+      platform: 'LinkedIn',
+      level: 'Avanzado',
+      description: 'B2B, marca personal/corporativa, social selling, carruseles y thought leadership',
+      icon: '💼',
+      color: 'bg-blue-300'
     },
     {
-      title: 'Estratega de Marca',
-      company: 'Vulk Clothing',
-      period: '2020 - 2022',
-      description: 'Desarrollo de identidad de marca, estrategias de contenido y gestión de redes sociales para posicionamiento en el mercado de moda urbana.',
-      icon: '👕'
+      platform: 'Strava',
+      level: 'Intermedio',
+      description: 'Gestión de comunidad y contenidos de nicho para running',
+      icon: '🏃‍♀️',
+      color: 'bg-orange-300'
     },
     {
-      title: 'Community Manager',
-      company: "Local's Only",
-      period: '2018 - 2020',
-      description: 'Creación de contenido audiovisual, gestión de comunidades online y desarrollo de campañas creativas para marcas locales.',
-      icon: '📱'
+      platform: 'TikTok',
+      level: 'Intermedio',
+      description: 'Pruebas de formato, hooks y tendencias',
+      icon: '🎵',
+      color: 'bg-purple-300'
     },
     {
-      title: 'Fotógrafa y Artista Visual',
-      company: 'Independiente',
-      period: '2016 - 2018',
-      description: 'Inicio de mi carrera en el mundo del arte y la fotografía, desarrollando proyectos creativos y colaboraciones artísticas.',
-      icon: '📸'
+      platform: 'X (Twitter)',
+      level: 'Básico',
+      description: 'Monitoreo y comunicación puntual',
+      icon: '🐦',
+      color: 'bg-gray-300'
     }
+  ];
+
+  // Idiomas
+  languages: Language[] = [
+    { name: 'Español', level: 'Nativo', flag: '🇪🇸' },
+    { name: 'Inglés', level: 'C1 – Avanzado', flag: '🇺🇸', description: 'fluido en entornos profesionales diarios' },
+    { name: 'Portugués', level: 'Avanzado', flag: '🇧🇷', description: 'uso cotidiano, residencia en Brasil' },
+    { name: 'Italiano', level: 'Básico', flag: '🇮🇹' },
+    { name: 'Francés', level: 'Básico', flag: '🇫🇷' }
   ];
 
   achievements: Achievement[] = [
@@ -198,6 +315,48 @@ export class AboutComponent implements OnDestroy {
 
   translate(key: string): string {
     return this.i18nService.translate(key);
+  }
+
+  getLevelBadgeClass(level: string): string {
+    if (level.includes('Avanzado')) return 'bg-green-100 text-green-800';
+    if (level.includes('Intermedio')) return 'bg-blue-100 text-blue-800';
+    if (level.includes('Básico')) return 'bg-gray-100 text-gray-800';
+    if (level.includes('Nativo') || level.includes('C1')) return 'bg-purple-100 text-purple-800';
+    return 'bg-gray-100 text-gray-800';
+  }
+
+  // Accordion toggle methods
+  toggleProfessionalSkills(): void {
+    this.professionalSkillsOpen = !this.professionalSkillsOpen;
+  }
+
+  toggleTools(): void {
+    this.toolsOpen = !this.toolsOpen;
+  }
+
+  toggleCreative(): void {
+    this.creativeOpen = !this.creativeOpen;
+  }
+
+  toggleSocial(): void {
+    this.socialOpen = !this.socialOpen;
+  }
+
+  toggleLanguages(): void {
+    this.languagesOpen = !this.languagesOpen;
+  }
+
+  // Flip card methods
+  toggleFlipCard(index: number): void {
+    if (this.flippedCards.has(index)) {
+      this.flippedCards.delete(index);
+    } else {
+      this.flippedCards.add(index);
+    }
+  }
+
+  isCardFlipped(index: number): boolean {
+    return this.flippedCards.has(index);
   }
 
   // Carrusel methods

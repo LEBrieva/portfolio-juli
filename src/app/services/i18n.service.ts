@@ -233,6 +233,62 @@ export class I18nService {
       en: 'Certification in Technical Degree in Audiovisual Arts.',
       pt: 'Certificação em Técnica em Artes Audiovisuales.'
     },
+    
+    // Nueva estructura de habilidades
+    'about.skills.professional.title': {
+      es: 'Competencias Profesionales',
+      en: 'Professional Competencies',
+      pt: 'Competências Profissionais'
+    },
+    'about.skills.professional.description': {
+      es: 'Estrategias y competencias clave para el liderazgo y la gestión de proyectos de marketing.',
+      en: 'Key strategies and competencies for leadership and marketing project management.',
+      pt: 'Estratégias e competências chave para liderança e gestão de projetos de marketing.'
+    },
+    'about.skills.tools.title': {
+      es: 'Herramientas y Plataformas',
+      en: 'Tools and Platforms',
+      pt: 'Ferramentas e Plataformas'
+    },
+    'about.skills.tools.description': {
+      es: 'Dominio de herramientas digitales para gestión, colaboración, social media e inteligencia artificial.',
+      en: 'Mastery of digital tools for management, collaboration, social media and artificial intelligence.',
+      pt: 'Domínio de ferramentas digitais para gestão, colaboração, mídia social e inteligência artificial.'
+    },
+    'about.skills.creative.title': {
+      es: 'Producción & Creatividad',
+      en: 'Production & Creativity',
+      pt: 'Produção & Criatividade'
+    },
+    'about.skills.creative.description': {
+      es: 'Habilidades creativas y técnicas para la producción de contenido audiovisual y diseño.',
+      en: 'Creative and technical skills for audiovisual content production and design.',
+      pt: 'Habilidades criativas e técnicas para produção de conteúdo audiovisual e design.'
+    },
+    
+    // Redes Sociales
+    'about.social.title': {
+      es: 'Experiencia en Redes Sociales',
+      en: 'Social Media Experience',
+      pt: 'Experiência em Redes Sociais'
+    },
+    'about.social.description': {
+      es: 'Expertise especializado en las principales plataformas de redes sociales con resultados comprobados.',
+      en: 'Specialized expertise in major social media platforms with proven results.',
+      pt: 'Expertise especializado nas principais plataformas de redes sociais com resultados comprovados.'
+    },
+    
+    // Idiomas
+    'about.languages.title': {
+      es: 'Idiomas',
+      en: 'Languages',
+      pt: 'Idiomas'
+    },
+    'about.languages.description': {
+      es: 'Competencias lingüísticas que permiten comunicación efectiva en mercados globales.',
+      en: 'Language skills that enable effective communication in global markets.',
+      pt: 'Competências linguísticas que permitem comunicação eficaz em mercados globais.'
+    },
 
     // Portfolio
     'portfolio.description': {
