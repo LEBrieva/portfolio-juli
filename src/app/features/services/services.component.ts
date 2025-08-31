@@ -24,109 +24,93 @@ export class ServicesComponent {
   expandedService = signal<string | null>(null);
   hoveredService = signal<string | null>(null);
   selectedServicePlan = signal<ServicePlan | null>(null);
+  cardPositions = new Map<string, {top: number, left: number, width: number}>();
 
   services: Service[] = [
     {
-      id: 'marketing-digital',
-      title: 'Marketing Digital Integral',
-      description: 'Estrategias completas de marketing digital para potenciar tu presencia online.',
-      icon: '📊',
+      id: 'auditoria-express',
+      title: 'Auditoría Express de Redes + Workshop (2 h)',
+      description: 'Diagnóstico accionable de tu presencia digital (contenido, bio, highlights, pauta, SEO local si aplica) + plan de mejoras inmediatas.',
+      icon: '🔍',
       features: [
-        'Análisis de mercado y competencia',
-        'Estrategia de contenidos personalizada',
-        'Gestión de redes sociales',
-        'Campañas publicitarias (Google Ads, Facebook Ads)',
-        'Email marketing automation',
-        'SEO y optimización web',
-        'Analytics y reportes mensuales',
-        'Consultoría estratégica continua'
+        'Análisis completo de presencia digital',
+        'Diagnóstico de contenido actual',
+        'Revisión de biografías y highlights',
+        'Evaluación de pauta publicitaria',
+        'SEO local cuando aplique',
+        'Plan de mejoras inmediatas',
+        'Workshop práctico de 2 horas',
+        'Recomendaciones accionables'
       ],
-      price: 'Desde $800'
+      price: 'A cotizar'
     },
     {
-      id: 'produccion-audiovisual',
-      title: 'Producción Audiovisual',
-      description: 'Creación de contenido audiovisual profesional para tus proyectos.',
-      icon: '🎬',
+      id: 'consultoria-marca-personal',
+      title: 'Consultoría de Marca Personal',
+      description: 'Definición de identidad, propuesta de valor, tono, pilares de contenido y playbook para LinkedIn/Instagram.',
+      icon: '👤',
       features: [
-        'Videos promocionales y comerciales',
-        'Documentales corporativos',
-        'Contenido para redes sociales',
-        'Grabación y edición profesional',
-        'Motion graphics y animación',
-        'Color grading y post-producción',
-        'Guión y dirección creativa',
-        'Entrega en múltiples formatos'
+        'Definición de identidad personal',
+        'Desarrollo de propuesta de valor',
+        'Definición de tono de comunicación',
+        'Pilares de contenido personalizados',
+        'Playbook para LinkedIn',
+        'Playbook para Instagram',
+        'Estrategia de posicionamiento',
+        'Guidelines de marca personal'
       ],
-      price: 'Desde $1,200'
+      price: 'A cotizar'
     },
     {
-      id: 'fotografia-profesional',
-      title: 'Fotografía Profesional',
-      description: 'Sesiones fotográficas de alta calidad para productos, retratos y eventos.',
-      icon: '📸',
+      id: 'consultoria-marketing-externa',
+      title: 'Consultoría Externa de Marketing',
+      description: 'Estrategia integral por objetivos: calendario, campañas, colaboraciones con influencers/afiliados y seguimiento por OKRs/KPIs.',
+      icon: '📈',
       features: [
-        'Fotografía de producto',
-        'Retratos corporativos',
-        'Fotografía de eventos',
-        'Sesiones en estudio y exteriores',
-        'Retoque digital profesional',
-        'Entrega en alta resolución',
-        'Derechos de uso comercial',
-        'Galería online privada'
+        'Estrategia integral por objetivos',
+        'Calendario de contenidos estratégico',
+        'Diseño de campañas efectivas',
+        'Colaboraciones con influencers',
+        'Programas de afiliados',
+        'Definición de OKRs',
+        'Seguimiento de KPIs',
+        'Reportes y optimización'
       ],
-      price: 'Desde $400'
+      price: 'A cotizar'
     },
     {
-      id: 'branding-identidad',
-      title: 'Branding e Identidad Visual',
-      description: 'Desarrollo de identidad visual completa para marcas que quieren destacar.',
-      icon: '🎨',
+      id: 'branding-comunicacion',
+      title: 'Branding & Comunicación',
+      description: 'Storytelling, reposicionamiento, lanzamientos, guidelines de estilo y mensajes.',
+      icon: '✨',
       features: [
-        'Investigación y análisis de marca',
-        'Diseño de logotipo y variaciones',
-        'Paleta de colores y tipografías',
-        'Manual de identidad visual',
-        'Aplicaciones en papelería',
-        'Diseño para redes sociales',
-        'Mockups y presentaciones',
-        'Archivos fuente y vectoriales'
+        'Desarrollo de storytelling',
+        'Estrategias de reposicionamiento',
+        'Planes de lanzamiento',
+        'Guidelines de estilo',
+        'Arquitectura de mensajes',
+        'Identidad visual aplicada',
+        'Tono de voz consistente',
+        'Narrativa de marca'
       ],
-      price: 'Desde $600'
+      price: 'A cotizar'
     },
     {
-      id: 'consultoria-estrategica',
-      title: 'Consultoría Estratégica',
-      description: 'Asesoramiento experto para optimizar tu estrategia de marketing y comunicación.',
-      icon: '💡',
+      id: 'capacitaciones-workshops',
+      title: 'Capacitaciones & Workshops',
+      description: 'Talleres a medida para equipos: contenido que rinde, buenas prácticas, flujo de trabajo y herramientas (Notion/Canva/IA).',
+      icon: '🎓',
       features: [
-        'Auditoría de marketing actual',
-        'Análisis de competencia',
-        'Definición de buyer personas',
-        'Plan estratégico personalizado',
-        'Optimización de procesos',
-        'Training y capacitación',
-        'Seguimiento y métricas KPI',
-        'Sesiones mensuales de revisión'
+        'Talleres personalizados para equipos',
+        'Contenido que genera resultados',
+        'Implementación de buenas prácticas',
+        'Optimización de flujo de trabajo',
+        'Capacitación en Notion',
+        'Capacitación en Canva',
+        'Integración de herramientas IA',
+        'Metodologías de trabajo eficientes'
       ],
-      price: 'Desde $300'
-    },
-    {
-      id: 'social-media',
-      title: 'Gestión de Redes Sociales',
-      description: 'Administración completa de tus redes sociales con contenido de calidad.',
-      icon: '📱',
-      features: [
-        'Estrategia de contenidos',
-        'Creación de posts diarios',
-        'Diseño gráfico personalizado',
-        'Programación automática',
-        'Interacción con seguidores',
-        'Stories y contenido dinámico',
-        'Análisis de métricas',
-        'Reportes mensuales detallados'
-      ],
-      price: 'Desde $500'
+      price: 'A cotizar'
     }
   ];
 
@@ -230,6 +214,11 @@ export class ServicesComponent {
       classes += 'border-primary-600 shadow-2xl -translate-y-2 ';
     } else {
       classes += 'border-transparent ';
+    }
+    
+    // Z-index elevado cuando está expandida
+    if (isExpanded) {
+      classes += 'z-50 ';
     }
     
     return classes;

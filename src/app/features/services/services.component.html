@@ -11,83 +11,292 @@
       </p>
     </div>
 
-    <!-- Services Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-      <div 
-        *ngFor="let service of services; let i = index"
-        class="group cursor-pointer"
-        (click)="toggleServiceDetails(service.id)"
-        (mouseenter)="setHoveredService(service.id)"
-        (mouseleave)="setHoveredService(null)"
-      >
+    <!-- Services Grid - Pirámide Invertida -->
+    <div class="mb-16">
+      <!-- Primera fila: primeros 3 servicios -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
         <div 
-          [class]="getServiceCardClass(service.id)"
-          class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2"
+          *ngFor="let service of services.slice(0, 3); let i = index"
+          class="group cursor-pointer flex relative"
+          (click)="toggleServiceDetails(service.id)"
+          (mouseenter)="setHoveredService(service.id)"
+          (mouseleave)="setHoveredService(null)"
         >
-          <!-- Service Icon & Title -->
-          <div class="text-center mb-6">
-            <div 
-              [class]="getIconClass(service.id)"
-              class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
-            >
-              {{ service.icon }}
-            </div>
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ service.title }}</h3>
-            <p class="text-gray-600 leading-relaxed">{{ service.description }}</p>
-          </div>
-
-          <!-- Service Features -->
-          <div class="space-y-3 mb-6">
-            <div 
-              *ngFor="let feature of service.features.slice(0, 3)" 
-              class="flex items-center space-x-3"
-            >
-              <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <span class="text-primary-600 text-xs">✓</span>
-              </div>
-              <span class="text-gray-700">{{ feature }}</span>
-            </div>
-            <div 
-              *ngIf="service.features.length > 3"
-              class="text-primary-600 text-sm font-medium"
-            >
-              +{{ service.features.length - 3 }} características más
-            </div>
-          </div>
-
-          <!-- Price -->
-          <div class="text-center mb-6">
-            <div class="text-3xl font-bold text-gray-900 mb-1">{{ service.price }}</div>
-            <div class="text-sm text-gray-500">Precio base</div>
-          </div>
-
-          <!-- CTA Button -->
-          <app-button
-            variant="primary"
-            [fullWidth]="true"
-            (clicked)="selectService(service)"
-          >
-            <span class="mr-2">💬</span>
-            Consultar
-          </app-button>
-
-          <!-- Expandable Details -->
+          <!-- Placeholder invisible cuando está expandida para mantener el espacio -->
           <div 
             *ngIf="expandedService() === service.id"
-            class="mt-6 pt-6 border-t border-gray-100 animate-fade-in"
+            class="bg-transparent w-full flex flex-col"
+            style="min-height: 384px"
+          ></div>
+          
+          <!-- Tarjeta real -->
+          <div 
+            [class]="getServiceCardClass(service.id)"
+            [attr.data-service-id]="service.id"
+            class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2 w-full flex flex-col"
+            [class.absolute]="expandedService() === service.id"
+            [class.top-0]="expandedService() === service.id"
+            [class.left-0]="expandedService() === service.id"
+            [class.relative]="expandedService() !== service.id"
           >
-            <h4 class="font-bold text-gray-900 mb-3">Características Completas:</h4>
-            <div class="space-y-2">
+          <!-- Main Content -->
+          <div class="flex-grow">
+            <!-- Service Icon & Title -->
+            <div class="text-center mb-6">
               <div 
-                *ngFor="let feature of service.features" 
-                class="flex items-start space-x-3"
+                [class]="getIconClass(service.id)"
+                class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
               >
-                <div class="w-4 h-4 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                {{ service.icon }}
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ service.title }}</h3>
+              <p class="text-gray-600 leading-relaxed text-sm">{{ service.description }}</p>
+            </div>
+
+            <!-- Service Features -->
+            <div class="space-y-3 mb-6">
+              <!-- Always show first 3 features -->
+              <div 
+                *ngFor="let feature of service.features.slice(0, 3)" 
+                class="flex items-center space-x-3"
+              >
+                <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span class="text-primary-600 text-xs">✓</span>
                 </div>
                 <span class="text-gray-700 text-sm">{{ feature }}</span>
               </div>
+              
+              <!-- Show additional features when expanded -->
+              <div 
+                *ngIf="expandedService() === service.id"
+                class="space-y-3 animate-fade-in"
+              >
+                <div 
+                  *ngFor="let feature of service.features.slice(3)" 
+                  class="flex items-center space-x-3"
+                >
+                  <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-primary-600 text-xs">✓</span>
+                  </div>
+                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                </div>
+              </div>
+              
+              <!-- Show "more features" text only when not expanded and has more than 3 -->
+              <div 
+                *ngIf="expandedService() !== service.id && service.features.length > 3"
+                class="text-primary-600 text-sm font-medium text-center"
+              >
+                +{{ service.features.length - 3 }} características más
+              </div>
             </div>
+          </div>
+
+          <!-- CTA Button - Always at bottom -->
+          <div class="mt-auto">
+            <app-button
+              variant="primary"
+              [fullWidth]="true"
+              (clicked)="selectService(service)"
+            >
+              <span class="mr-2">💬</span>
+              Consultar Cotización
+            </app-button>
+          </div>
+
+
+        </div>
+        </div>
+      </div>
+
+      <!-- Segunda fila: últimos 2 servicios centrados -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        
+        <!-- Primer servicio de la segunda fila: columnas 2-3 -->
+        <div 
+          *ngIf="services[3]" 
+          class="group cursor-pointer lg:col-span-2 lg:col-start-2 flex relative"
+          (click)="toggleServiceDetails(services[3].id)"
+          (mouseenter)="setHoveredService(services[3].id)"
+          (mouseleave)="setHoveredService(null)"
+        >
+          <!-- Placeholder invisible cuando está expandida para mantener el espacio -->
+          <div 
+            *ngIf="expandedService() === services[3].id"
+            class="bg-transparent w-full flex flex-col"
+            style="min-height: 384px"
+          ></div>
+          
+          <!-- Tarjeta real -->
+          <div 
+            [class]="getServiceCardClass(services[3].id)"
+            [attr.data-service-id]="services[3].id"
+            class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2 w-full flex flex-col"
+            [class.absolute]="expandedService() === services[3].id"
+            [class.top-0]="expandedService() === services[3].id"
+            [class.left-0]="expandedService() === services[3].id"
+            [class.relative]="expandedService() !== services[3].id"
+          >
+            <!-- Main Content -->
+            <div class="flex-grow">
+              <!-- Service Icon & Title -->
+              <div class="text-center mb-6">
+                <div 
+                  [class]="getIconClass(services[3].id)"
+                  class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
+                >
+                  {{ services[3].icon }}
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ services[3].title }}</h3>
+                <p class="text-gray-600 leading-relaxed text-sm">{{ services[3].description }}</p>
+              </div>
+
+              <!-- Service Features -->
+              <div class="space-y-3 mb-6">
+                <!-- Always show first 3 features -->
+                <div 
+                  *ngFor="let feature of services[3].features.slice(0, 3)" 
+                  class="flex items-center space-x-3"
+                >
+                  <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-primary-600 text-xs">✓</span>
+                  </div>
+                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                </div>
+                
+                <!-- Show additional features when expanded -->
+                <div 
+                  *ngIf="expandedService() === services[3].id"
+                  class="space-y-3 animate-fade-in"
+                >
+                  <div 
+                    *ngFor="let feature of services[3].features.slice(3)" 
+                    class="flex items-center space-x-3"
+                  >
+                    <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-primary-600 text-xs">✓</span>
+                    </div>
+                    <span class="text-gray-700 text-sm">{{ feature }}</span>
+                  </div>
+                </div>
+                
+                <!-- Show "more features" text only when not expanded and has more than 3 -->
+                <div 
+                  *ngIf="expandedService() !== services[3].id && services[3].features.length > 3"
+                  class="text-primary-600 text-sm font-medium text-center"
+                >
+                  +{{ services[3].features.length - 3 }} características más
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button - Always at bottom -->
+            <div class="mt-auto">
+              <app-button
+                variant="primary"
+                [fullWidth]="true"
+                (clicked)="selectService(services[3])"
+              >
+                <span class="mr-2">💬</span>
+                Consultar Cotización
+              </app-button>
+            </div>
+
+
+          </div>
+        </div>
+        
+        <!-- Segundo servicio de la segunda fila: columnas 4-5 -->
+        <div 
+          *ngIf="services[4]" 
+          class="group cursor-pointer lg:col-span-2 lg:col-start-4 flex relative"
+          (click)="toggleServiceDetails(services[4].id)"
+          (mouseenter)="setHoveredService(services[4].id)"
+          (mouseleave)="setHoveredService(null)"
+        >
+          <!-- Placeholder invisible cuando está expandida para mantener el espacio -->
+          <div 
+            *ngIf="expandedService() === services[4].id"
+            class="bg-transparent w-full flex flex-col"
+            style="min-height: 384px"
+          ></div>
+          
+          <!-- Tarjeta real -->
+          <div 
+            [class]="getServiceCardClass(services[4].id)"
+            [attr.data-service-id]="services[4].id"
+            class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2 w-full flex flex-col"
+            [class.absolute]="expandedService() === services[4].id"
+            [class.top-0]="expandedService() === services[4].id"
+            [class.left-0]="expandedService() === services[4].id"
+            [class.relative]="expandedService() !== services[4].id"
+          >
+            <!-- Main Content -->
+            <div class="flex-grow">
+              <!-- Service Icon & Title -->
+              <div class="text-center mb-6">
+                <div 
+                  [class]="getIconClass(services[4].id)"
+                  class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
+                >
+                  {{ services[4].icon }}
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ services[4].title }}</h3>
+                <p class="text-gray-600 leading-relaxed text-sm">{{ services[4].description }}</p>
+              </div>
+
+              <!-- Service Features -->
+              <div class="space-y-3 mb-6">
+                <!-- Always show first 3 features -->
+                <div 
+                  *ngFor="let feature of services[4].features.slice(0, 3)" 
+                  class="flex items-center space-x-3"
+                >
+                  <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span class="text-primary-600 text-xs">✓</span>
+                  </div>
+                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                </div>
+                
+                <!-- Show additional features when expanded -->
+                <div 
+                  *ngIf="expandedService() === services[4].id"
+                  class="space-y-3 animate-fade-in"
+                >
+                  <div 
+                    *ngFor="let feature of services[4].features.slice(3)" 
+                    class="flex items-center space-x-3"
+                  >
+                    <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span class="text-primary-600 text-xs">✓</span>
+                    </div>
+                    <span class="text-gray-700 text-sm">{{ feature }}</span>
+                  </div>
+                </div>
+                
+                <!-- Show "more features" text only when not expanded and has more than 3 -->
+                <div 
+                  *ngIf="expandedService() !== services[4].id && services[4].features.length > 3"
+                  class="text-primary-600 text-sm font-medium text-center"
+                >
+                  +{{ services[4].features.length - 3 }} características más
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button - Always at bottom -->
+            <div class="mt-auto">
+              <app-button
+                variant="primary"
+                [fullWidth]="true"
+                (clicked)="selectService(services[4])"
+              >
+                <span class="mr-2">💬</span>
+                Consultar Cotización
+              </app-button>
+            </div>
+
+
           </div>
         </div>
       </div>
