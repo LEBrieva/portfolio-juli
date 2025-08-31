@@ -19,11 +19,11 @@ export class PortfolioComponent {
   visibleProjects = signal(6);
 
   categories = [
-    { id: 'all', name: 'Todos', icon: '🎯' },
-    { id: 'Marketing Digital', name: 'Marketing', icon: '📊' },
-    { id: 'Audiovisual', name: 'Audiovisual', icon: '🎬' },
-    { id: 'Fotografía', name: 'Fotografía', icon: '📸' },
-    { id: 'Diseño', name: 'Diseño', icon: '🎨' }
+    { id: 'all', nameKey: 'portfolio.categories.all', icon: '🎯' },
+    { id: 'Marketing Digital', nameKey: 'portfolio.categories.marketing', icon: '📊' },
+    { id: 'Audiovisual', nameKey: 'portfolio.categories.audiovisual', icon: '🎬' },
+    { id: 'Fotografía', nameKey: 'portfolio.categories.photography', icon: '📸' },
+    { id: 'Diseño', nameKey: 'portfolio.categories.design', icon: '🎨' }
   ];
 
   projects: PortfolioProject[] = [

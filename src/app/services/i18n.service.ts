@@ -234,13 +234,45 @@ export class I18nService {
       pt: 'Certificação em Técnica em Artes Audiovisuales.'
     },
 
+    // Portfolio
+    'portfolio.description': {
+      es: 'Explora una selección de mis trabajos más destacados en marketing digital y producción audiovisual.',
+      en: 'Explore a selection of my most notable works in digital marketing and audiovisual production.',
+      pt: 'Explore uma seleção de meus trabalhos mais destacados em marketing digital e produção audiovisual.'
+    },
+    // Portfolio Categories
+    'portfolio.categories.all': {
+      es: 'Todos',
+      en: 'All',
+      pt: 'Todos'
+    },
+    'portfolio.categories.marketing': {
+      es: 'Marketing',
+      en: 'Marketing',
+      pt: 'Marketing'
+    },
+    'portfolio.categories.audiovisual': {
+      es: 'Audiovisual',
+      en: 'Audiovisual',
+      pt: 'Audiovisual'
+    },
+    'portfolio.categories.photography': {
+      es: 'Fotografía',
+      en: 'Photography',
+      pt: 'Fotografia'
+    },
+    'portfolio.categories.design': {
+      es: 'Diseño',
+      en: 'Design',
+      pt: 'Design'
+    },
+
     // Services
     'services.title': {
       es: 'Servicios',
       en: 'Services',
       pt: 'Serviços'
     },
-    
     // Contact
     'contact.title': {
       es: 'Contacto',

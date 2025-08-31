@@ -7,7 +7,7 @@
       </h2>
       <div class="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-8"></div>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        Explora una selección de mis trabajos más destacados en marketing digital y producción audiovisual.
+        {{ translate('portfolio.description') }}
       </p>
     </div>
 
@@ -22,7 +22,7 @@
             class="px-6 py-2 rounded-full font-medium transition-all duration-300"
           >
             <span class="mr-2">{{ category.icon }}</span>
-            {{ category.name }}
+            {{ translate(category.nameKey) }}
           </button>
         </div>
       </div>
@@ -32,7 +32,7 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
       <div 
         *ngFor="let project of filteredProjects; trackBy: trackByProjectId"
-        class="transform hover:scale-105 transition-transform duration-300"
+        class="transform hover:scale-105 transition-transform duration-300 portfolio-card"
       >
         <app-card
           [title]="project.title"
@@ -44,14 +44,15 @@
           [padding]="'md'"
           [hoverable]="true"
           [showActions]="true"
+          [customStyles]="{ 'height': '100%', 'display': 'flex', 'flex-direction': 'column' }"
         >
-          <div slot="content">
-            <p class="text-gray-600 leading-relaxed mb-4">
+          <div slot="content" class="portfolio-card-content">
+            <p class="text-gray-600 leading-relaxed mb-4 portfolio-card-description">
               {{ project.description }}
             </p>
           </div>
           
-          <div slot="actions" class="flex flex-col sm:flex-row gap-3">
+          <div slot="actions" class="flex flex-col sm:flex-row gap-3 portfolio-card-actions">
             <app-button
               *ngIf="project.demoUrl"
               variant="primary"
