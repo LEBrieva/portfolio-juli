@@ -323,17 +323,6 @@ export class I18nService {
       pt: 'Design'
     },
 
-    // Services
-    'services.title': {
-      es: 'Servicios',
-      en: 'Services',
-      pt: 'Serviços'
-    },
-    'services.description': {
-      es: 'Ofrezco soluciones integrales que combinan creatividad audiovisual con estrategias de marketing efectivas.',
-      en: 'I offer comprehensive solutions that combine audiovisual creativity with effective marketing strategies.',
-      pt: 'Ofereço soluções integrais que combinam criatividade audiovisual com estratégias de marketing eficazes.'
-    },
     // Contact
     'contact.title': {
       es: 'Contacto',
@@ -344,6 +333,310 @@ export class I18nService {
       es: '¡Trabajemos juntos!',
       en: "Let's work together!",
       pt: 'Vamos trabalhar juntos!'
+    },
+
+    // Services section
+    'services.title': {
+      es: 'Servicios',
+      en: 'Services',
+      pt: 'Serviços'
+    },
+    'services.description': {
+      es: 'Soluciones estratégicas personalizadas para potenciar tu marca y conectar con tu audiencia de manera auténtica.',
+      en: 'Customized strategic solutions to boost your brand and authentically connect with your audience.',
+      pt: 'Soluções estratégicas personalizadas para potencializar sua marca e conectar com seu público de forma autêntica.'
+    },
+
+    // Service 1: Auditoría Express
+    'services.auditoria.title': {
+      es: 'Auditoría Express de Redes + Workshop (2 h)',
+      en: 'Express Social Media Audit + Workshop (2 h)',
+      pt: 'Auditoria Express de Redes + Workshop (2 h)'
+    },
+    'services.auditoria.description': {
+      es: 'Diagnóstico accionable de tu presencia digital (contenido, bio, highlights, pauta, SEO local si aplica) + plan de mejoras inmediatas.',
+      en: 'Actionable diagnosis of your digital presence (content, bio, highlights, ads, local SEO if applicable) + immediate improvement plan.',
+      pt: 'Diagnóstico acionável da sua presença digital (conteúdo, bio, destaques, anúncios, SEO local se aplicável) + plano de melhorias imediatas.'
+    },
+    'services.auditoria.feature1': {
+      es: 'Análisis completo de presencia digital',
+      en: 'Complete digital presence analysis',
+      pt: 'Análise completa da presença digital'
+    },
+    'services.auditoria.feature2': {
+      es: 'Diagnóstico de contenido actual',
+      en: 'Current content diagnosis',
+      pt: 'Diagnóstico do conteúdo atual'
+    },
+    'services.auditoria.feature3': {
+      es: 'Revisión de biografías y highlights',
+      en: 'Bio and highlights review',
+      pt: 'Revisão de biografias e destaques'
+    },
+    'services.auditoria.feature4': {
+      es: 'Evaluación de pauta publicitaria',
+      en: 'Advertising evaluation',
+      pt: 'Avaliação de publicidade'
+    },
+    'services.auditoria.feature5': {
+      es: 'SEO local cuando aplique',
+      en: 'Local SEO when applicable',
+      pt: 'SEO local quando aplicável'
+    },
+    'services.auditoria.feature6': {
+      es: 'Plan de mejoras inmediatas',
+      en: 'Immediate improvement plan',
+      pt: 'Plano de melhorias imediatas'
+    },
+    'services.auditoria.feature7': {
+      es: 'Workshop práctico de 2 horas',
+      en: '2-hour practical workshop',
+      pt: 'Workshop prático de 2 horas'
+    },
+    'services.auditoria.feature8': {
+      es: 'Recomendaciones accionables',
+      en: 'Actionable recommendations',
+      pt: 'Recomendações acionáveis'
+    },
+
+    // Service 2: Consultoría de Marca Personal
+    'services.marca.title': {
+      es: 'Consultoría de Marca Personal',
+      en: 'Personal Branding Consulting',
+      pt: 'Consultoria de Marca Pessoal'
+    },
+    'services.marca.description': {
+      es: 'Definición de identidad, propuesta de valor, tono, pilares de contenido y playbook para LinkedIn/Instagram.',
+      en: 'Identity definition, value proposition, tone, content pillars and playbook for LinkedIn/Instagram.',
+      pt: 'Definição de identidade, proposta de valor, tom, pilares de conteúdo e playbook para LinkedIn/Instagram.'
+    },
+    'services.marca.feature1': {
+      es: 'Definición de identidad personal',
+      en: 'Personal identity definition',
+      pt: 'Definição de identidade pessoal'
+    },
+    'services.marca.feature2': {
+      es: 'Desarrollo de propuesta de valor',
+      en: 'Value proposition development',
+      pt: 'Desenvolvimento da proposta de valor'
+    },
+    'services.marca.feature3': {
+      es: 'Definición de tono de comunicación',
+      en: 'Communication tone definition',
+      pt: 'Definição do tom de comunicação'
+    },
+    'services.marca.feature4': {
+      es: 'Pilares de contenido personalizados',
+      en: 'Customized content pillars',
+      pt: 'Pilares de conteúdo personalizados'
+    },
+    'services.marca.feature5': {
+      es: 'Playbook para LinkedIn',
+      en: 'LinkedIn playbook',
+      pt: 'Playbook para LinkedIn'
+    },
+    'services.marca.feature6': {
+      es: 'Playbook para Instagram',
+      en: 'Instagram playbook',
+      pt: 'Playbook para Instagram'
+    },
+    'services.marca.feature7': {
+      es: 'Estrategia de posicionamiento',
+      en: 'Positioning strategy',
+      pt: 'Estratégia de posicionamento'
+    },
+    'services.marca.feature8': {
+      es: 'Guidelines de marca personal',
+      en: 'Personal brand guidelines',
+      pt: 'Diretrizes de marca pessoal'
+    },
+
+    // Service 3: Consultoría Externa de Marketing
+    'services.marketing.title': {
+      es: 'Consultoría Externa de Marketing',
+      en: 'External Marketing Consulting',
+      pt: 'Consultoria Externa de Marketing'
+    },
+    'services.marketing.description': {
+      es: 'Estrategia integral por objetivos: calendario, campañas, colaboraciones con influencers/afiliados y seguimiento por OKRs/KPIs.',
+      en: 'Comprehensive objective-based strategy: calendar, campaigns, influencer/affiliate collaborations and OKR/KPI tracking.',
+      pt: 'Estratégia integral por objetivos: calendário, campanhas, colaborações com influencers/afiliados e acompanhamento por OKRs/KPIs.'
+    },
+    'services.marketing.feature1': {
+      es: 'Estrategia integral por objetivos',
+      en: 'Comprehensive objective-based strategy',
+      pt: 'Estratégia integral por objetivos'
+    },
+    'services.marketing.feature2': {
+      es: 'Calendario de contenidos estratégico',
+      en: 'Strategic content calendar',
+      pt: 'Calendário de conteúdos estratégico'
+    },
+    'services.marketing.feature3': {
+      es: 'Diseño de campañas efectivas',
+      en: 'Effective campaign design',
+      pt: 'Design de campanhas eficazes'
+    },
+    'services.marketing.feature4': {
+      es: 'Colaboraciones con influencers',
+      en: 'Influencer collaborations',
+      pt: 'Colaborações com influencers'
+    },
+    'services.marketing.feature5': {
+      es: 'Programas de afiliados',
+      en: 'Affiliate programs',
+      pt: 'Programas de afiliados'
+    },
+    'services.marketing.feature6': {
+      es: 'Definición de OKRs',
+      en: 'OKR definition',
+      pt: 'Definição de OKRs'
+    },
+    'services.marketing.feature7': {
+      es: 'Seguimiento de KPIs',
+      en: 'KPI tracking',
+      pt: 'Acompanhamento de KPIs'
+    },
+    'services.marketing.feature8': {
+      es: 'Reportes y optimización',
+      en: 'Reports and optimization',
+      pt: 'Relatórios e otimização'
+    },
+
+    // Service 4: Branding & Comunicación
+    'services.branding.title': {
+      es: 'Branding & Comunicación',
+      en: 'Branding & Communication',
+      pt: 'Branding & Comunicação'
+    },
+    'services.branding.description': {
+      es: 'Storytelling, reposicionamiento, lanzamientos, guidelines de estilo y mensajes.',
+      en: 'Storytelling, repositioning, launches, style guidelines and messaging.',
+      pt: 'Storytelling, reposicionamento, lançamentos, diretrizes de estilo e mensagens.'
+    },
+    'services.branding.feature1': {
+      es: 'Desarrollo de storytelling',
+      en: 'Storytelling development',
+      pt: 'Desenvolvimento de storytelling'
+    },
+    'services.branding.feature2': {
+      es: 'Estrategias de reposicionamiento',
+      en: 'Repositioning strategies',
+      pt: 'Estratégias de reposicionamento'
+    },
+    'services.branding.feature3': {
+      es: 'Planes de lanzamiento',
+      en: 'Launch plans',
+      pt: 'Planos de lançamento'
+    },
+    'services.branding.feature4': {
+      es: 'Guidelines de estilo',
+      en: 'Style guidelines',
+      pt: 'Diretrizes de estilo'
+    },
+    'services.branding.feature5': {
+      es: 'Arquitectura de mensajes',
+      en: 'Message architecture',
+      pt: 'Arquitetura de mensagens'
+    },
+    'services.branding.feature6': {
+      es: 'Identidad visual aplicada',
+      en: 'Applied visual identity',
+      pt: 'Identidade visual aplicada'
+    },
+    'services.branding.feature7': {
+      es: 'Tono de voz consistente',
+      en: 'Consistent tone of voice',
+      pt: 'Tom de voz consistente'
+    },
+    'services.branding.feature8': {
+      es: 'Narrativa de marca',
+      en: 'Brand narrative',
+      pt: 'Narrativa de marca'
+    },
+
+    // Service 5: Capacitaciones & Workshops
+    'services.capacitaciones.title': {
+      es: 'Capacitaciones & Workshops',
+      en: 'Training & Workshops',
+      pt: 'Capacitações & Workshops'
+    },
+    'services.capacitaciones.description': {
+      es: 'Talleres a medida para equipos: contenido que rinde, buenas prácticas, flujo de trabajo y herramientas (Notion/Canva/IA).',
+      en: 'Custom team workshops: high-performing content, best practices, workflow and tools (Notion/Canva/AI).',
+      pt: 'Workshops personalizados para equipes: conteúdo que funciona, boas práticas, fluxo de trabalho e ferramentas (Notion/Canva/IA).'
+    },
+    'services.capacitaciones.feature1': {
+      es: 'Talleres personalizados para equipos',
+      en: 'Custom team workshops',
+      pt: 'Workshops personalizados para equipes'
+    },
+    'services.capacitaciones.feature2': {
+      es: 'Contenido que genera resultados',
+      en: 'Result-generating content',
+      pt: 'Conteúdo que gera resultados'
+    },
+    'services.capacitaciones.feature3': {
+      es: 'Implementación de buenas prácticas',
+      en: 'Best practices implementation',
+      pt: 'Implementação de boas práticas'
+    },
+    'services.capacitaciones.feature4': {
+      es: 'Optimización de flujo de trabajo',
+      en: 'Workflow optimization',
+      pt: 'Otimização do fluxo de trabalho'
+    },
+    'services.capacitaciones.feature5': {
+      es: 'Capacitación en Notion',
+      en: 'Notion training',
+      pt: 'Capacitação em Notion'
+    },
+    'services.capacitaciones.feature6': {
+      es: 'Capacitación en Canva',
+      en: 'Canva training',
+      pt: 'Capacitação em Canva'
+    },
+    'services.capacitaciones.feature7': {
+      es: 'Integración de herramientas IA',
+      en: 'AI tools integration',
+      pt: 'Integração de ferramentas IA'
+    },
+    'services.capacitaciones.feature8': {
+      es: 'Metodologías de trabajo eficientes',
+      en: 'Efficient work methodologies',
+      pt: 'Metodologias de trabalho eficientes'
+    },
+
+    // UI Elements
+    'services.consultQuote': {
+      es: 'Consultar Cotización',
+      en: 'Request Quote',
+      pt: 'Solicitar Cotação'
+    },
+    'services.startConversation': {
+      es: 'Iniciar Conversación',
+      en: 'Start Conversation',
+      pt: 'Iniciar Conversa'
+    },
+    'services.moreFeatures': {
+      es: 'características más',
+      en: 'more features',
+      pt: 'características a mais'
+    },
+    'services.readyToStart': {
+      es: '¿Listo para comenzar tu proyecto?',
+      en: 'Ready to start your project?',
+      pt: 'Pronto para começar seu projeto?'
+    },
+    'services.letsCreateTogether': {
+      es: 'Hablemos sobre tus ideas y creemos algo increíble juntos',
+      en: "Let's talk about your ideas and create something amazing together",
+      pt: 'Vamos conversar sobre suas ideias e criar algo incrível juntos'
+    },
+    'services.price': {
+      es: 'A cotizar',
+      en: 'Quote on request',
+      pt: 'A cotar'
     }
   };
 

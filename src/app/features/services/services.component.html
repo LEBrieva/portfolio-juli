@@ -49,8 +49,8 @@
               >
                 {{ service.icon }}
               </div>
-              <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ service.title }}</h3>
-              <p class="text-gray-600 leading-relaxed text-sm">{{ service.description }}</p>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ translate(service.title) }}</h3>
+              <p class="text-gray-600 leading-relaxed text-sm">{{ translate(service.description) }}</p>
             </div>
 
             <!-- Service Features -->
@@ -63,7 +63,7 @@
                 <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span class="text-primary-600 text-xs">✓</span>
                 </div>
-                <span class="text-gray-700 text-sm">{{ feature }}</span>
+                <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
               </div>
               
               <!-- Show additional features when expanded -->
@@ -78,7 +78,7 @@
                   <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <span class="text-primary-600 text-xs">✓</span>
                   </div>
-                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                  <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
                 </div>
               </div>
               
@@ -87,7 +87,7 @@
                 *ngIf="expandedService() !== service.id && service.features.length > 3"
                 class="text-primary-600 text-sm font-medium text-center"
               >
-                +{{ service.features.length - 3 }} características más
+                +{{ service.features.length - 3 }} {{ translate('services.moreFeatures') }}
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
               (clicked)="selectService(service)"
             >
               <span class="mr-2">💬</span>
-              Consultar Cotización
+              {{ translate('services.consultQuote') }}
             </app-button>
           </div>
 
@@ -161,7 +161,7 @@
                   <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <span class="text-primary-600 text-xs">✓</span>
                   </div>
-                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                  <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
                 </div>
                 
                 <!-- Show additional features when expanded -->
@@ -176,7 +176,7 @@
                     <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <span class="text-primary-600 text-xs">✓</span>
                     </div>
-                    <span class="text-gray-700 text-sm">{{ feature }}</span>
+                    <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
                   </div>
                 </div>
                 
@@ -185,7 +185,7 @@
                   *ngIf="expandedService() !== services[3].id && services[3].features.length > 3"
                   class="text-primary-600 text-sm font-medium text-center"
                 >
-                  +{{ services[3].features.length - 3 }} características más
+                  +{{ services[3].features.length - 3 }} {{ translate('services.moreFeatures') }}
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@
                 (clicked)="selectService(services[3])"
               >
                 <span class="mr-2">💬</span>
-                Consultar Cotización
+                {{ translate('services.consultQuote') }}
               </app-button>
             </div>
 
@@ -255,7 +255,7 @@
                   <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                     <span class="text-primary-600 text-xs">✓</span>
                   </div>
-                  <span class="text-gray-700 text-sm">{{ feature }}</span>
+                  <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
                 </div>
                 
                 <!-- Show additional features when expanded -->
@@ -270,7 +270,7 @@
                     <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
                       <span class="text-primary-600 text-xs">✓</span>
                     </div>
-                    <span class="text-gray-700 text-sm">{{ feature }}</span>
+                    <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
                   </div>
                 </div>
                 
@@ -279,7 +279,7 @@
                   *ngIf="expandedService() !== services[4].id && services[4].features.length > 3"
                   class="text-primary-600 text-sm font-medium text-center"
                 >
-                  +{{ services[4].features.length - 3 }} características más
+                  +{{ services[4].features.length - 3 }} {{ translate('services.moreFeatures') }}
                 </div>
               </div>
             </div>
@@ -292,7 +292,7 @@
                 (clicked)="selectService(services[4])"
               >
                 <span class="mr-2">💬</span>
-                Consultar Cotización
+                {{ translate('services.consultQuote') }}
               </app-button>
             </div>
 
@@ -391,9 +391,9 @@
     <!-- Contact CTA -->
     <div class="mt-16 text-center">
       <div class="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-3xl p-8 lg:p-12 text-white">
-        <h3 class="text-3xl font-bold mb-4">¿Listo para comenzar tu proyecto?</h3>
+        <h3 class="text-3xl font-bold mb-4">{{ translate('services.readyToStart') }}</h3>
         <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Hablemos sobre tus ideas y creemos algo increíble juntos
+          {{ translate('services.letsCreateTogether') }}
         </p>
         <app-button
           variant="secondary"
@@ -402,7 +402,7 @@
           class="bg-white text-primary-600 hover:bg-gray-50"
         >
           <span class="mr-2">💬</span>
-          Iniciar Conversación
+          {{ translate('services.startConversation') }}
         </app-button>
       </div>
     </div>

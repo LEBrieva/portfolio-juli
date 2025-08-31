@@ -29,88 +29,88 @@ export class ServicesComponent {
   services: Service[] = [
     {
       id: 'auditoria-express',
-      title: 'Auditoría Express de Redes + Workshop (2 h)',
-      description: 'Diagnóstico accionable de tu presencia digital (contenido, bio, highlights, pauta, SEO local si aplica) + plan de mejoras inmediatas.',
+      title: 'services.auditoria.title',
+      description: 'services.auditoria.description',
       icon: '🔍',
       features: [
-        'Análisis completo de presencia digital',
-        'Diagnóstico de contenido actual',
-        'Revisión de biografías y highlights',
-        'Evaluación de pauta publicitaria',
-        'SEO local cuando aplique',
-        'Plan de mejoras inmediatas',
-        'Workshop práctico de 2 horas',
-        'Recomendaciones accionables'
+        'services.auditoria.feature1',
+        'services.auditoria.feature2',
+        'services.auditoria.feature3',
+        'services.auditoria.feature4',
+        'services.auditoria.feature5',
+        'services.auditoria.feature6',
+        'services.auditoria.feature7',
+        'services.auditoria.feature8'
       ],
-      price: 'A cotizar'
+      price: 'services.price'
     },
     {
       id: 'consultoria-marca-personal',
-      title: 'Consultoría de Marca Personal',
-      description: 'Definición de identidad, propuesta de valor, tono, pilares de contenido y playbook para LinkedIn/Instagram.',
+      title: 'services.marca.title',
+      description: 'services.marca.description',
       icon: '👤',
       features: [
-        'Definición de identidad personal',
-        'Desarrollo de propuesta de valor',
-        'Definición de tono de comunicación',
-        'Pilares de contenido personalizados',
-        'Playbook para LinkedIn',
-        'Playbook para Instagram',
-        'Estrategia de posicionamiento',
-        'Guidelines de marca personal'
+        'services.marca.feature1',
+        'services.marca.feature2',
+        'services.marca.feature3',
+        'services.marca.feature4',
+        'services.marca.feature5',
+        'services.marca.feature6',
+        'services.marca.feature7',
+        'services.marca.feature8'
       ],
-      price: 'A cotizar'
+      price: 'services.price'
     },
     {
       id: 'consultoria-marketing-externa',
-      title: 'Consultoría Externa de Marketing',
-      description: 'Estrategia integral por objetivos: calendario, campañas, colaboraciones con influencers/afiliados y seguimiento por OKRs/KPIs.',
+      title: 'services.marketing.title',
+      description: 'services.marketing.description',
       icon: '📈',
       features: [
-        'Estrategia integral por objetivos',
-        'Calendario de contenidos estratégico',
-        'Diseño de campañas efectivas',
-        'Colaboraciones con influencers',
-        'Programas de afiliados',
-        'Definición de OKRs',
-        'Seguimiento de KPIs',
-        'Reportes y optimización'
+        'services.marketing.feature1',
+        'services.marketing.feature2',
+        'services.marketing.feature3',
+        'services.marketing.feature4',
+        'services.marketing.feature5',
+        'services.marketing.feature6',
+        'services.marketing.feature7',
+        'services.marketing.feature8'
       ],
-      price: 'A cotizar'
+      price: 'services.price'
     },
     {
       id: 'branding-comunicacion',
-      title: 'Branding & Comunicación',
-      description: 'Storytelling, reposicionamiento, lanzamientos, guidelines de estilo y mensajes.',
+      title: 'services.branding.title',
+      description: 'services.branding.description',
       icon: '✨',
       features: [
-        'Desarrollo de storytelling',
-        'Estrategias de reposicionamiento',
-        'Planes de lanzamiento',
-        'Guidelines de estilo',
-        'Arquitectura de mensajes',
-        'Identidad visual aplicada',
-        'Tono de voz consistente',
-        'Narrativa de marca'
+        'services.branding.feature1',
+        'services.branding.feature2',
+        'services.branding.feature3',
+        'services.branding.feature4',
+        'services.branding.feature5',
+        'services.branding.feature6',
+        'services.branding.feature7',
+        'services.branding.feature8'
       ],
-      price: 'A cotizar'
+      price: 'services.price'
     },
     {
       id: 'capacitaciones-workshops',
-      title: 'Capacitaciones & Workshops',
-      description: 'Talleres a medida para equipos: contenido que rinde, buenas prácticas, flujo de trabajo y herramientas (Notion/Canva/IA).',
+      title: 'services.capacitaciones.title',
+      description: 'services.capacitaciones.description',
       icon: '🎓',
       features: [
-        'Talleres personalizados para equipos',
-        'Contenido que genera resultados',
-        'Implementación de buenas prácticas',
-        'Optimización de flujo de trabajo',
-        'Capacitación en Notion',
-        'Capacitación en Canva',
-        'Integración de herramientas IA',
-        'Metodologías de trabajo eficientes'
+        'services.capacitaciones.feature1',
+        'services.capacitaciones.feature2',
+        'services.capacitaciones.feature3',
+        'services.capacitaciones.feature4',
+        'services.capacitaciones.feature5',
+        'services.capacitaciones.feature6',
+        'services.capacitaciones.feature7',
+        'services.capacitaciones.feature8'
       ],
-      price: 'A cotizar'
+      price: 'services.price'
     }
   ];
 
@@ -191,7 +191,9 @@ export class ServicesComponent {
   constructor(private i18nService: I18nService) {}
 
   translate(key: string): string {
-    return this.i18nService.translate(key);
+    const result = this.i18nService.translate(key);
+    console.log(`Translating "${key}" -> "${result}"`);
+    return result;
   }
 
   toggleServiceDetails(serviceId: string): void {
@@ -243,12 +245,15 @@ export class ServicesComponent {
   }
 
   selectService(service: Service): void {
-    // Create WhatsApp message with service information
+    // Create WhatsApp message with service information using translations
     const phoneNumber = '5522991026770'; // +55 22 99102-6770 without + and spaces
-    const message = `¡Hola! Me interesa obtener más información sobre el servicio "${service.title}".
+    const serviceTitle = this.translate(service.title);
+    const serviceDescription = this.translate(service.description);
+    
+    const message = `¡Hola! Me interesa obtener más información sobre el servicio "${serviceTitle}".
 
 Descripción del servicio:
-${service.description}
+${serviceDescription}
 
 Me gustaría conocer más detalles sobre:
 • Precio y formas de pago
