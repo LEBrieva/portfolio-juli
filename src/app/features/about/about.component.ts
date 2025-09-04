@@ -283,13 +283,6 @@ export class AboutComponent implements OnDestroy {
     }
   ];
 
-  stats = [
-    { value: '150+', label: 'Proyectos Completados' },
-    { value: '50+', label: 'Clientes Satisfechos' },
-    { value: '8', label: 'Años de Experiencia' },
-    { value: '15', label: 'Premios Obtenidos' }
-  ];
-
   constructor(private i18nService: I18nService) {
     this.checkScreenSize();
     // Listen to window resize events
