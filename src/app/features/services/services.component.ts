@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { I18nService } from '../../services/i18n.service';
@@ -20,7 +20,19 @@ interface ServicePlan {
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css']
 })
-export class ServicesComponent {
+export class ServicesComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
+  
+  // Carousel state
+  currentSlide = signal(0);
+  isMobile = signal(false);
+  private resizeObserver?: ResizeObserver;
+  
+  // Touch handling
+  private touchStartX = 0;
+  private touchEndX = 0;
+  private minSwipeDistance = 50;
   expandedService = signal<string | null>(null);
   hoveredService = signal<string | null>(null);
   selectedServicePlan = signal<ServicePlan | null>(null);
@@ -189,6 +201,85 @@ export class ServicesComponent {
   ];
 
   constructor(private i18nService: I18nService) {}
+
+  ngOnInit(): void {
+    if (this.isBrowser) {
+      this.checkIsMobile();
+      this.setupResizeListener();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
+
+  private checkIsMobile(): void {
+    if (this.isBrowser) {
+      this.isMobile.set(window.innerWidth < 1024); // lg breakpoint
+    }
+  }
+
+  private setupResizeListener(): void {
+    if (this.isBrowser && 'ResizeObserver' in window) {
+      this.resizeObserver = new ResizeObserver(() => {
+        this.checkIsMobile();
+      });
+      this.resizeObserver.observe(document.body);
+    }
+  }
+
+  // Carousel navigation methods
+  nextSlide(): void {
+    const maxSlide = this.services.length - 1;
+    const current = this.currentSlide();
+    this.currentSlide.set(current >= maxSlide ? 0 : current + 1);
+  }
+
+  prevSlide(): void {
+    const maxSlide = this.services.length - 1;
+    const current = this.currentSlide();
+    this.currentSlide.set(current <= 0 ? maxSlide : current - 1);
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlide.set(index);
+  }
+
+  // Touch event handlers
+  onTouchStart(event: TouchEvent): void {
+    if (!this.isMobile()) return;
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  onTouchEnd(event: TouchEvent): void {
+    if (!this.isMobile()) return;
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+
+  private handleSwipe(): void {
+    const swipeDistance = this.touchStartX - this.touchEndX;
+    
+    if (Math.abs(swipeDistance) < this.minSwipeDistance) {
+      return; // Not a significant swipe
+    }
+    
+    if (swipeDistance > 0) {
+      // Swipe left (next slide)
+      this.nextSlide();
+    } else {
+      // Swipe right (previous slide)
+      this.prevSlide();
+    }
+  }
+
+  getCarouselTransform(): string {
+    if (!this.isMobile()) return 'translateX(0)';
+    const translateX = -this.currentSlide() * 100;
+    return `translateX(${translateX}%)`;
+  }
 
   translate(key: string): string {
     const result = this.i18nService.translate(key);

@@ -11,10 +11,120 @@
       </p>
     </div>
 
-    <!-- Services Grid - Pirámide Invertida -->
+    <!-- Services Grid - Desktop: Pirámide Invertida, Mobile: Carousel -->
     <div class="mb-16">
-      <!-- Primera fila: primeros 3 servicios -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+      <!-- Mobile Carousel -->
+      <div *ngIf="isMobile()" class="carousel-container relative">
+        <div 
+          class="carousel-wrapper overflow-hidden"
+          (touchstart)="onTouchStart($event)"
+          (touchend)="onTouchEnd($event)"
+        >
+          <div 
+            class="carousel-track flex transition-transform duration-300 ease-in-out"
+            [style.transform]="getCarouselTransform()"
+          >
+            <div 
+              *ngFor="let service of services; let i = index"
+              class="carousel-slide w-full flex-shrink-0 px-4"
+            >
+              <div 
+                class="group cursor-pointer flex relative"
+                (click)="toggleServiceDetails(service.id)"
+              >
+                <!-- Service Card Content -->
+                <div 
+                  [class]="getServiceCardClass(service.id)"
+                  [attr.data-service-id]="service.id"
+                  class="bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 border-2 w-full flex flex-col"
+                >
+                  <!-- Main Content -->
+                  <div class="flex-grow">
+                    <!-- Service Icon & Title -->
+                    <div class="text-center mb-6">
+                      <div 
+                        [class]="getIconClass(service.id)"
+                        class="w-16 h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300"
+                      >
+                        {{ service.icon }}
+                      </div>
+                      <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ translate(service.title) }}</h3>
+                      <p class="text-gray-600 leading-relaxed text-sm">{{ translate(service.description) }}</p>
+                    </div>
+
+                    <!-- Service Features -->
+                    <div class="space-y-3 mb-6">
+                      <!-- Always show first 3 features -->
+                      <div 
+                        *ngFor="let feature of service.features.slice(0, 3)" 
+                        class="flex items-center space-x-3"
+                      >
+                        <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span class="text-primary-600 text-xs">✓</span>
+                        </div>
+                        <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
+                      </div>
+                      
+                      <!-- Show additional features when expanded -->
+                      <div 
+                        *ngIf="expandedService() === service.id"
+                        class="space-y-3 animate-fade-in"
+                      >
+                        <div 
+                          *ngFor="let feature of service.features.slice(3)" 
+                          class="flex items-center space-x-3"
+                        >
+                          <div class="w-5 h-5 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-primary-600 text-xs">✓</span>
+                          </div>
+                          <span class="text-gray-700 text-sm">{{ translate(feature) }}</span>
+                        </div>
+                      </div>
+                      
+                      <!-- Show "more features" text only when not expanded and has more than 3 -->
+                      <div 
+                        *ngIf="expandedService() !== service.id && service.features.length > 3"
+                        class="text-primary-600 text-sm font-medium text-center"
+                      >
+                        +{{ service.features.length - 3 }} {{ translate('services.moreFeatures') }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- CTA Button - Always at bottom -->
+                  <div class="mt-auto">
+                    <app-button
+                      variant="primary"
+                      [fullWidth]="true"
+                      (clicked)="selectService(service)"
+                    >
+                      <span class="mr-2">💬</span>
+                      {{ translate('services.consultQuote') }}
+                    </app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Carousel Indicators/Bullets -->
+        <div class="flex justify-center mt-6 space-x-2">
+          <button
+            *ngFor="let service of services; let i = index"
+            (click)="goToSlide(i)"
+            class="w-3 h-3 rounded-full transition-all duration-200"
+            [class.bg-primary-600]="currentSlide() === i"
+            [class.bg-gray-300]="currentSlide() !== i"
+            [class.scale-125]="currentSlide() === i"
+          ></button>
+        </div>
+      </div>
+
+      <!-- Desktop Grid -->
+      <div *ngIf="!isMobile()">
+        <!-- Primera fila: primeros 3 servicios -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
         <div 
           *ngFor="let service of services.slice(0, 3); let i = index"
           class="group cursor-pointer flex relative"
@@ -300,6 +410,7 @@
           </div>
         </div>
       </div>
+      </div> <!-- Close desktop grid wrapper -->
     </div>
 
     <!-- Service Plans -->

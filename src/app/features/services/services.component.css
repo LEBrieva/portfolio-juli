@@ -14,3 +14,94 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
 }
+
+/* Carousel styles for mobile */
+@media (max-width: 1023px) {
+  .carousel-container {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .carousel-wrapper {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 1rem;
+  }
+  
+  .carousel-track {
+    display: flex;
+    will-change: transform;
+  }
+  
+  .carousel-slide {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 0 1rem;
+    display: flex;
+    align-items: stretch;
+  }
+  
+  /* Ensure all service cards have the same height */
+  .carousel-slide .group {
+    width: 100%;
+  }
+  
+  .carousel-slide .bg-white {
+    min-height: 480px; /* Fixed minimum height for consistency */
+    height: 100%;
+  }
+  
+  .carousel-slide:first-child {
+    padding-left: 0;
+  }
+  
+  .carousel-slide:last-child {
+    padding-right: 0;
+  }
+  
+  /* Touch optimizations */
+  .carousel-wrapper {
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Bullet indicators */
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  .carousel-bullet {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #d1d5db; /* gray-300 */
+  }
+  
+  .carousel-bullet.active {
+    background-color: #db2777; /* primary-600 */
+    transform: scale(1.25);
+  }
+  
+  .carousel-bullet:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Smooth carousel animation */
+  .carousel-track {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* Ensure desktop styles are preserved */
+@media (min-width: 1024px) {
+  .carousel-container {
+    display: none !important;
+  }
+}
